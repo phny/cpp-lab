@@ -1,15 +1,15 @@
 /*************************************************************************
-	> File Name: hello.cpp
+	> File Name: move_construct.cpp
 	> Author: 
 	> Mail: 
-	> Created Time: 2020年01月08日 星期三 15时16分57秒
-	> Created Time: 2020年01月20日 星期一 22时40分24秒
+	> Created Time: 2020年02月27日 星期四 23时47分24秒
  ************************************************************************/
 
 #include<iostream>
+
 using namespace std;
 
 int main() {
-    cout << "hello world" << endl;
+    std::cout << "move construct test" << std::endl;
     return 0;
 }
