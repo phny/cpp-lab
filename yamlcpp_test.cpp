@@ -15,6 +15,8 @@ using namespace std;
 int main(int argc,char** argv)
 {
     YAML::Node config = YAML::LoadFile("./config.yaml");
+    config["test"]["test"] = "tets";
+    std::cout << config["test"]["test"] << std::endl;
 
     cout << "Node type " << config.Type() << endl;
     cout << "skills type " << config["skills"].Type() << endl;

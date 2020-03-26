@@ -21,7 +21,7 @@ foreach(mainfile IN LISTS mains)
     endif()
     if (${mainname} MATCHES "yamlcpp_test")
         message(${mainname})
-        target_link_libraries(${mainname} libyaml-cpp.so)
+        target_link_libraries(${mainname} libyaml-cpp.a)
     endif()
    
 endforeach()
