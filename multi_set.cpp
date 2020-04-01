@@ -8,9 +8,10 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
+#include <vector>
 
 
-int main ()
+int main (int argc, char* argv[])
 {
     std::vector<int> myints = {10, 20, 30, 20, 20};
     std::vector<int> myints2 = {10, 10, 20, 20, 30, 40};

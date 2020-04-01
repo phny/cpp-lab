@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(cmaketest VERSION 0.1.0)
 
@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -fPIC -mavx")
 
 find_package(Threads REQUIRED)
 include_directories("${PROJECT_BINARY_DIR}")
-include_directories(/home/SENSETIME/heyulin/learn/yaml-cpp/include)
+# include_directories(/home/SENSETIME/heyulin/learn/yaml-cpp/include)
 
 # Find all main*.cpp files and store in list mains
 file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
@@ -21,7 +21,7 @@ foreach(mainfile IN LISTS mains)
     endif()
     if (${mainname} MATCHES "yamlcpp_test")
         message(${mainname})
-        target_link_libraries(${mainname} libyaml-cpp.a)
+        target_link_libraries(${mainname} libyaml-cpp.so)
     endif()
    
 endforeach()
