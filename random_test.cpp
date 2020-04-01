@@ -17,7 +17,7 @@ int main()
 {
        cout <<"RAND_MAX:"<< RAND_MAX << endl;
        srand((unsigned)time(NULL));
-       for (int i = 0; i < 500; i++)
-              cout <<  (rand() % (RAND_MAX - 1 + 1)) + 1 << endl;; //生成[3,7]范围内的随机数
+       for (int i = 0; i < 5; i++)
+              cout <<  (rand() % (1 - 100 + 1)) + 1 << endl;; //生成[3,7]范围内的随机数
        cout << endl;
 }

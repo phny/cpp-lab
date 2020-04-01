@@ -30,5 +30,20 @@ int main(int argc, char* argv[]) {
         cout << i << endl;
     }
 
+    // vector swap test
+    vector<int> v3 = {1,2,3};
+    vector<int> v4 = {4,5,6};
+
+    v3.swap(v4);
+
+    // 释放v4的内存空间
+    v4.clear();
+    vector<int>().swap(v4);
+     
+    cout << "v3 = " << endl;
+    for (auto i: v3) {
+        cout << i << endl;
+    }
+
     return 0;
 }
