@@ -14,6 +14,35 @@
 #include <string.h>
 #include <vector>
 using namespace std;
+
+
+/// @brief 判断路径是否为文件
+///   里面调用了 stat 的系统接口: man 2 stat 查看具体用法
+static bool IsFile(const std::string &path) {
+  struct stat path_stat;
+
+  if (stat(path.c_str(), &path_stat) == 0) {
+    // 路径存在则判断是否为文件 (REG 表示 regular file)
+    return S_ISREG(path_stat.st_mode);
+  } else {
+    // 路径不存在则返回 false
+    return false;
+  }
+}
+
+/// @brief 判断路径是否为文件夹
+///   里面调用了 stat 的系统接口: man 2 stat 查看具体用法
+static bool IsDirectory(const std::string &path) {
+  struct stat path_stat;
+
+  if (stat(path.c_str(), &path_stat) == 0) {
+    // 路径存在则判断是否为文件夹
+    return S_ISDIR(path_stat.st_mode);
+  } else {
+    // 路径不存在则返回 false
+    return false;
+  }
+}
  
 void GetDirAllFiles(std::string& feature_dir, std::vector<std::string>& out_file_paths) {
     if ("" == feature_dir) {
@@ -41,14 +70,16 @@ void GetDirAllFiles(std::string& feature_dir, std::vector<std::string>& out_file
         }
         auto ind = feature_dir.find_last_of("/");
         std::string abs_path = ind == feature_dir.length()-1 ? feature_dir + filename->d_name : feature_dir + "/" + filename->d_name; 
-        out_file_paths.push_back(abs_path);
+		if (IsFile(abs_path)) {
+            out_file_paths.push_back(abs_path);
+		}
     }
 }
 
  
 int main()
 {
-    std::string feature_dir = "/data/pyutils";
+    std::string feature_dir = "/home/SENSETIME/heyulin";
     std::vector<std::string> out;
     GetDirAllFiles(feature_dir, out);
     for (auto i : out) {
