@@ -7,9 +7,15 @@
  ************************************************************************/
 
 #include<iostream>
+#include <vector>
+
 using namespace std;
 
 int main() {
     cout << "hello world" << endl;
+    
+    vector<int> v(1000000);
+    cout << v.size() << endl;
+    cout << std::to_string(static_cast<double>(v.size()) / 34326.67 * 1000) << endl;
     return 0;
 }

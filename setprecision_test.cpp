@@ -9,9 +9,15 @@
 
 using namespace std;
 
+void test() {
+    double a = 10.02;
+    cout << a << endl;
+}
+
+
 int main() {
     // 设置浮点数显示精度
-    cout.precision(8);
+    cout.precision(6);
     // 打印末尾的0和小数点
     cout.setf(ios_base::showpoint);
 
@@ -22,6 +28,8 @@ int main() {
 
     uint64_t a = 10000880000;
     cout << a << endl;
+
+    test();
 
     return 0;
 }
