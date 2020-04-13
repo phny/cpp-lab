@@ -1,32 +1,32 @@
 /*************************************************************************
-	> File Name: ostringstream_test.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: 2020年04月03日 星期五 17时27分45秒
+        > File Name: ostringstream_test.cpp
+        > Author:
+        > Mail:
+        > Created Time: 2020年04月03日 星期五 17时27分45秒
  ************************************************************************/
 
 #include <iostream>
-#include <vector>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
-    std::ostringstream oss;
-    
-    oss << "dhhdhhd";
-    oss << 'd';
-    oss << 2333;
+int main(int argc, char *argv[]) {
+  std::ostringstream oss;
 
-    oss.put('a');
+  oss << "dhhdhhd";
+  oss << 'd';
+  oss << 2333;
 
-    std::cout << oss.str() << std::endl;
+  oss.put('a');
 
-    std::string s1;
+  std::cout << oss.str() << std::endl;
 
-    s1 = oss.str();
+  std::string s1;
 
-    std::cout << s1 << std::endl;
+  s1 = oss.str();
 
-    return 0;
+  std::cout << s1 << std::endl;
+
+  return 0;
 }
