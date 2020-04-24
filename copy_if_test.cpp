@@ -7,8 +7,8 @@
 
 #include <algorithm>
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -23,8 +23,8 @@ static bool has_ending(std::string const &fullString,
 }
 
 struct A {
-    int age;
-    std::string name;
+  int age;
+  std::string name;
 };
 
 int main() {
