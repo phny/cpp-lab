@@ -26,5 +26,19 @@ int main() {
   for (auto i : v2) {
     cout << i << endl;
   }
+
+ // swap test 2
+ std::vector<int> v3 = {1,2,3};
+ std::vector<int> v4;
+ v4.swap(v3);
+ std::cout << "v3:" << std::endl;
+    for (auto i : v3) {
+        std::cout << i << endl;
+    }
+ std::cout << "v4:" << std::endl;
+    for (auto i : v4) {
+        std::cout << i << endl;
+    }
+
   return 0;
 }
