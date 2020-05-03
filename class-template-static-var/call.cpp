@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: call.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: 2020年05月03日 星期日 12时01分46秒
+        > File Name: call.cpp
+        > Author:
+        > Mail:
+        > Created Time: 2020年05月03日 星期日 12时01分46秒
  ************************************************************************/
 
 #include <iostream>
@@ -12,6 +12,6 @@
 using namespace std;
 
 void call() {
-    the_class<int> c;
-    std::cout << c.id << std::endl;
+  the_class<int> c;
+  std::cout << c.id << std::endl;
 }
