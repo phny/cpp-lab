@@ -14,10 +14,16 @@ int main(int argc, char *argv[]) {
   int a = 10;
   int b = 20;
 
-  auto func = []() { std::cout << "lambda test, basic lambda" << std::endl; };
-  auto func1 = [](int p) {
-    std::cout << "lambda test, with parameter" << p << std::endl;
-  };
+  // auto func = []() { std::cout << "lambda test, basic lambda" << std::endl;
+  // }();
+  // 定义即调用形式使用lambda
+  int ret = []() {
+    cout << "hello lambda" << endl;
+    return 10;
+  }();
+  cout << ret << endl;
+  int ret2 = [ret]() { return ret * ret; }();
+  cout << ret2 << endl;
   auto func2 = [](int p) -> int {
     std::cout << "lambda test, with parameter" << p << std::endl;
     return p;
@@ -32,14 +38,14 @@ int main(int argc, char *argv[]) {
     return p;
   };
 
-  func();
-  func1(a);
-  int ret = func2(a);
-  func3(a);
-  func4(a);
+  // func();
+  // func1(a);
+  // int ret = func2(a);
+  // func3(a);
+  // func4(a);
 
-  std::cout << "func2 ret = " << ret << std::endl;
-  std::cout << b << std::endl;
+  // std::cout << "func2 ret = " << ret << std::endl;
+  // std::cout << b << std::endl;
 
   return 0;
 }
