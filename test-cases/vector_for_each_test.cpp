@@ -22,9 +22,9 @@ int main() {
         cout << a << endl;
     });
 
-    std::replace_if(myvector.begin(), myvector.end(), [](string a) {
+   // std::replace_if(myvector.begin(), myvector.end(), [](string a) {
 
-    });
+   // });
 
     return 0;
 }
