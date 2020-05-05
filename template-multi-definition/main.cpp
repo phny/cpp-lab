@@ -2,15 +2,14 @@
 
 #include "other.hpp"
 
-int main()
-{
-    Hello<char> hc;
-    Hello<int> hi;
+int main() {
+  Hello<char> hc;
+  Hello<int> hi;
 
-    hc.print_hello('a');
-    hi.print_hello(1);
+  hc.print_hello('a');
+  hi.print_hello(1);
 
-    other_func();
+  other_func();
 
-    return 0;
+  return 0;
 }
