@@ -6,18 +6,26 @@
  ************************************************************************/
 
 #include <iostream>
-using namespace std;
-
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
+#include <vector>
+
 using namespace std;
 
-int main() {
-  cout << "RAND_MAX:" << RAND_MAX << endl;
+void RandomGenerateFeatureIds(int64_t start, int64_t end, std::vector<int64_t> &entity_ids, int a, int b) {
   srand((unsigned)time(NULL));
-  for (int i = 0; i < 5; i++)
-    cout << (rand() % (1 - 100 + 1)) + 1 << endl;
-  ; //生成[3,7]范围内的随机数
-  cout << endl;
+  int64_t feature_ids_len = (rand() % (b - a + 1)) + a;
+  for (int i = 0; i < feature_ids_len; i++) {
+    int64_t num = (rand() % (end - start + 1)) + start;
+    entity_ids.push_back(num);
+  }
+}
+
+int main() {
+  std::vector<int64_t> v;
+  RandomGenerateFeatureIds(0, 100, v, 1, 5);
+  for (auto& i : v) {
+    cout << i << endl;
+  }
 }
