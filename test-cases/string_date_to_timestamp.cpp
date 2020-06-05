@@ -11,19 +11,28 @@
 
 using namespace std;
 
+string TimestampToStringDate(int64_t timestamp) {
+    std::time_t t(timestamp);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&t), "%F %T");
+    return ss.str();
+}
+
 int main() {
+    string s{"2019-08-22 10:55:23"};
+    std::tm t{};
+    std::istringstream ss(s);
 
-	string s{"2019-08-22T10:55:23.000Z"};
-	std::tm t{};
-	std::istringstream ss(s);
-
-	ss >> std::get_time(&t, "%Y-%m-%dT%H:%M:%S");
-	if (ss.fail()) {
-		throw std::runtime_error{"failed to parse time string"};
-	}   
-	std::time_t time_stamp = mktime(&t);	
+    ss >> std::get_time(&t, "%Y-%m-%d %H:%M:%S");
+    if (ss.fail()) {
+        throw std::runtime_error{"failed to parse time string"};
+    }   
+    std::time_t time_stamp = mktime(&t);	
     cout << time_stamp << endl;
-	
-	return 0;
+    
+    auto ret = TimestampToStringDate(time_stamp);
+    cout << ret << endl;
+
+    return 0;
 }
 
