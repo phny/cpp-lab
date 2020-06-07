@@ -27,20 +27,20 @@ int main() {
     cout << i << endl;
   }
 
- // swap test 2
- std::vector<int> v3 = {1,2,3};
- std::vector<int> v4;
- v4.swap(v3);
- std::cout << "v3:" << std::endl;
-    for (auto i : v3) {
-        std::cout << i << endl;
-    }
- std::cout << "v4:" << std::endl;
-    for (auto i : v4) {
-        std::cout << i << endl;
-    }
-// swap test 3
- int i1 = 100;
- int i2 = 200;
+  // swap test 2
+  std::vector<int> v3 = {1, 2, 3};
+  std::vector<int> v4;
+  v4.swap(v3);
+  std::cout << "v3:" << std::endl;
+  for (auto i : v3) {
+    std::cout << i << endl;
+  }
+  std::cout << "v4:" << std::endl;
+  for (auto i : v4) {
+    std::cout << i << endl;
+  }
+  // swap test 3
+  int i1 = 100;
+  int i2 = 200;
   return 0;
 }

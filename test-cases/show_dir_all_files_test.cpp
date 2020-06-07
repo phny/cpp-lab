@@ -1,9 +1,9 @@
 /*************************************************************************
-        > File Name: show_dir_all_files_test.cpp
-        > Author:
-        > Mail:
-        > Created Time: 2020年03月20日 星期五 16时16分22秒
- ************************************************************************/
+> File Name: show_dir_all_files_test.cpp
+> Author:
+> Mail:
+> Created Time: 2020年03月20日 星期五 16时16分22秒
+************************************************************************/
 
 #include <dirent.h>
 #include <iostream>
@@ -42,7 +42,7 @@ static bool IsDirectory(const std::string &path) {
     return false;
   }
 }
-
+/// @brief 获取指定文件夹下面的所有文件（不包含子目录的文件）
 void GetDirAllFiles(std::string &feature_dir,
                     std::vector<std::string> &out_file_paths) {
   if ("" == feature_dir) {
@@ -77,12 +77,59 @@ void GetDirAllFiles(std::string &feature_dir,
   }
 }
 
+/// @brief 获取指定文件夹下面的所有文件（包含子目录的文件）
+void WalkDirAllFiles(std::string &feature_dir,
+                     std::vector<std::string> &out_file_paths) {
+  if ("" == feature_dir) {
+    cout << " feature_dir is null ! " << endl;
+    exit(-1);
+  }
+  struct stat s;
+  lstat(feature_dir.c_str(), &s);
+  if (!S_ISDIR(s.st_mode)) {
+    cout << "feature_dir is not a valid directory !" << endl;
+    exit(-1);
+  }
+  struct dirent *filename;
+  DIR *dir;
+  dir = opendir(feature_dir.c_str());
+  if (NULL == dir) {
+    cout << "Can not open dir " << feature_dir << endl;
+    exit(-1);
+  }
+  while ((filename = readdir(dir)) != NULL) {
+    if (strcmp(filename->d_name, ".") == 0 ||
+        strcmp(filename->d_name, "..") == 0) {
+      continue;
+    }
+    auto ind = feature_dir.find_last_of("/");
+    std::string abs_path = ind == feature_dir.length() - 1
+                               ? feature_dir + filename->d_name
+                               : feature_dir + "/" + filename->d_name;
+    if (IsFile(abs_path)) {
+      out_file_paths.push_back(abs_path);
+    } else {
+      WalkDirAllFiles(abs_path, out_file_paths);
+    }
+  }
+}
+
 int main() {
-  std::string feature_dir = "/home/SENSETIME/heyulin";
+  std::string feature_dir = "/home/hyl/learn/cpp-lab/build";
   std::vector<std::string> out;
+  // 获取文件夹下面的所有文件（不包含子目录）
   GetDirAllFiles(feature_dir, out);
   for (auto i : out) {
     std::cout << i << std::endl;
   }
+
+  std::cout << "--------------------------------------- " << std::endl;
+  // 获取文件夹下面的所有文件（包含子目录）
+  std::vector<std::string> files;
+  WalkDirAllFiles(feature_dir, files);
+  for (auto &file : files) {
+    std::cout << file << std::endl;
+  }
+
   return 0;
 }

@@ -10,8 +10,8 @@
 
 using namespace std;
 
-void EntitySetFragmentByTime(const vector<int>& v1, int time_step,
-                             vector<vector<int>>& output) {
+void EntitySetFragmentByTime(const vector<int> &v1, int time_step,
+                             vector<vector<int>> &output) {
   // 没有需要分片的特征直接返回
   if (v1.size() < 1) {
     return;
@@ -48,8 +48,8 @@ int main() {
   // vector<int> v1 = {};
   vector<vector<int>> result;
   EntitySetFragmentByTime(v1, 17200, result);
-  for (auto& fragment_vec : result) {
-    for (auto& entity : fragment_vec) {
+  for (auto &fragment_vec : result) {
+    for (auto &entity : fragment_vec) {
       cout << entity << " ";
     }
     cout << endl;
