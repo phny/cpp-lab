@@ -30,9 +30,11 @@ bool is_prime(int x) {
 // 往数组push值
 // 注意:  C++11的std::thread构造函数不支持std::ref的这种用法, 所以使用指针代替引用！或者用std::bind、lambda等解决
 void PushToVec(std::vector<int64_t>* v, int n) {
+    cout << "generate use: " << n << endl;
     for (int i = 0; i < n; i++) {
         v->push_back(i);
     }
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 }
 
 int main() {
