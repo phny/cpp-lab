@@ -1,34 +1,21 @@
-/*************************************************************************
-	> File Name: sort_test.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: 2020年06月05日 星期五 13时56分30秒
- ************************************************************************/
-
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <vector>
-#include <string>
 
 using namespace std;
 
-struct A {
-  int a;
-  string name;
-};
+typedef vector<int> A;
+bool face_cmp(const A *x, const A *y) { return x != y; }
 
+int main(int argc, char *argv[]) {
 
+  vector<A *> vec;
+  for (int i = 0; i < 100; i++) {
+    vec.push_back(new vector<int>(i % 100, i * i));
+  }
 
-int main(int argc, char* argv[]) {
-    vector<struct A> v = { {100, "a"}, {9, "b"}, {9, "c"}, {2, "d"}};
-    std::sort(v.begin(), v.end(), [](struct A a, struct A b) {return a.a <= b.a;});
+  vector<A *>::iterator it;
+  sort(vec.begin(), vec.end(), face_cmp);
 
-    for (auto& i : v) {
-        cout << i.a << ": " << i.name << endl;
-    }
-
-    cout << endl;
-    
-    return 0;
+  return EXIT_SUCCESS;
 }
-

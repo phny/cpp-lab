@@ -7,18 +7,18 @@
 
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   std::ifstream in_file("./test.txt");
 
-//   vector<string> v;
+  //   vector<string> v;
 
-//  string line;
+  //  string line;
   // while (in_file >> line) {
   //    // 这样子读取会有默认的分隔符,每次不是读取一行文件
   //    v.push_back(line);
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
   std::ifstream in_file2("./test.txt");
   string line;
-  map<int64_t, int64_t> m; 
+  map<int64_t, int64_t> m;
 
   if (in_file2.is_open()) {
     while (getline(in_file2, line)) {
