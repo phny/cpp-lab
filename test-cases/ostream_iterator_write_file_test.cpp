@@ -15,7 +15,7 @@ int main() {
   std::vector<int> data = {1, 21, 31, 41, 51, 61, 71, 81};
 
   std::ofstream dataFile("data_output.txt");
-  std::ostream_iterator<int> dataIter(dataFile, "\t");
+  std::ostream_iterator<int> dataIter(dataFile, "\n");
 
   std::copy(data.begin(), data.end(), dataIter);
 
