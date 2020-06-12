@@ -18,9 +18,9 @@ int main(int argc, char *argv[]) {
   m[2] = 2;
   m[3] = 3;
 
-    m1[4] = 4;
-    m1[5] = 5;
-    m1[1] = 6;
+  m1[4] = 4;
+  m1[5] = 5;
+  m1[1] = 6;
 
   m.insert(m1.begin(), m1.end());
 

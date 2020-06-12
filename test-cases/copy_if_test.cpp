@@ -23,7 +23,8 @@ static bool has_ending(std::string const &fullString,
 }
 
 /// @brief 判断是否以指定字符结尾
-static bool HavePrefix(std::string const& fullString, std::string const& prefix) {
+static bool HavePrefix(std::string const &fullString,
+                       std::string const &prefix) {
   if (fullString.rfind(prefix, 0) == 0) {
     // s starts with prefix
     return true;

@@ -10,8 +10,8 @@
 
 using namespace std;
 
-void EntitySetFragmentByTime(const vector<int64_t>& v1, int64_t time_step,
-                             vector<vector<int64_t>>& output) {
+void EntitySetFragmentByTime(const vector<int64_t> &v1, int64_t time_step,
+                             vector<vector<int64_t>> &output) {
   // 没有需要分片的特征直接返回
   if (v1.size() < 1) {
     return;
@@ -30,7 +30,8 @@ void EntitySetFragmentByTime(const vector<int64_t>& v1, int64_t time_step,
       tmp[fragments_ind].push_back(entity);
     } else {
       fragments_ind++;
-      next_fragment_point = std::min(next_fragment_point + time_step, end_timestamp);
+      next_fragment_point =
+          std::min(next_fragment_point + time_step, end_timestamp);
       tmp.resize(tmp.size() + 1);
       tmp[fragments_ind].push_back(entity);
     }
@@ -43,12 +44,12 @@ int main() {
   vector<int64_t> v1;
   int64_t start_timestamp = 1591200000;
   for (int i = 0; i < 86400; i++) {
-      v1.push_back(start_timestamp + i);
+    v1.push_back(start_timestamp + i);
   }
-  // 按照时间进行分片  
+  // 按照时间进行分片
   vector<vector<int64_t>> result;
   EntitySetFragmentByTime(v1, 10000, result);
-  
+
   // 输出每个分片结果的大小
   for (int i = 0; i < result.size(); i++) {
     cout << "fragment " << i << ": " << result[i].size() << endl;

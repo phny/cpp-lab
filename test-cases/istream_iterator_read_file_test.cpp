@@ -8,30 +8,29 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 int main() {
-    std::ifstream dataFile("data.txt");
-    std::istream_iterator<int> dataBegin(dataFile);
-    std::istream_iterator<int> dataEnd;
-    std::vector<int> data(dataBegin, dataEnd);
+  std::ifstream dataFile("data.txt");
+  std::istream_iterator<int> dataBegin(dataFile);
+  std::istream_iterator<int> dataEnd;
+  std::vector<int> data(dataBegin, dataEnd);
 
-    for (int i : data) {
-        std::cout << i << "\t";
-    }
-    std::cout << std::endl;
+  for (int i : data) {
+    std::cout << i << "\t";
+  }
+  std::cout << std::endl;
 
-    std::ifstream in_file("./test.txt");
-    std::istream_iterator<string> iter_begin(in_file);
-    std::istream_iterator<string> iter_end;
-    std::vector<string> v(iter_begin, iter_end);
-    for (auto& s : v) {
-        cout << s << endl;
-    }
+  std::ifstream in_file("./test.txt");
+  std::istream_iterator<string> iter_begin(in_file);
+  std::istream_iterator<string> iter_end;
+  std::vector<string> v(iter_begin, iter_end);
+  for (auto &s : v) {
+    cout << s << endl;
+  }
 
-
-    return 0;
+  return 0;
 }

@@ -1,28 +1,27 @@
 /*************************************************************************
 > File Name: get_all_directory.cpp
-> Author: 
-> Mail: 
+> Author:
+> Mail:
 > Created Time: 2020年06月01日 星期一 16时15分27秒
 ************************************************************************/
 
-#include<iostream>
 #include <dirent.h>
+#include <iostream>
 #include <stdio.h>
-#include <string>
-#include <vector>
-#include <sys/stat.h>
 #include <string.h>
+#include <string>
+#include <sys/stat.h>
+#include <vector>
 
 using namespace std;
 
-
 /// @brief 读取指定文件夹下面的所有子文件夹
-void GetAllDirectories(std::string path, std::vector<std::string>& all_dirs) {
-  const char* PATH = path.c_str();
+void GetAllDirectories(std::string path, std::vector<std::string> &all_dirs) {
+  const char *PATH = path.c_str();
   DIR *dir = opendir(PATH);
-    if (path.back() != '/') {
-        path += "/";
-    }
+  if (path.back() != '/') {
+    path += "/";
+  }
 
   struct dirent *entry = readdir(dir);
 
@@ -34,9 +33,9 @@ void GetAllDirectories(std::string path, std::vector<std::string>& all_dirs) {
       }
     }
     entry = readdir(dir);
-    }
-    closedir(dir);
-} 
+  }
+  closedir(dir);
+}
 
 /// @brief 判断路径是否为文件
 ///   里面调用了 stat 的系统接口: man 2 stat 查看具体用法
@@ -52,7 +51,8 @@ static bool IsFile(const std::string &path) {
   }
 }
 
-static void GetDirAllFiles(std::string feature_dir, std::vector<std::string> &out_file_paths) {
+static void GetDirAllFiles(std::string feature_dir,
+                           std::vector<std::string> &out_file_paths) {
   if ("" == feature_dir) {
     std::cout << " feature_dir is null ! " << std::endl;
     exit(-1);
@@ -71,12 +71,14 @@ static void GetDirAllFiles(std::string feature_dir, std::vector<std::string> &ou
     exit(-1);
   }
   while ((filename = readdir(dir)) != NULL) {
-    if (strcmp(filename->d_name, ".") == 0 || strcmp(filename->d_name, "..") == 0) {
+    if (strcmp(filename->d_name, ".") == 0 ||
+        strcmp(filename->d_name, "..") == 0) {
       continue;
     }
     auto ind = feature_dir.find_last_of("/");
-    std::string abs_path = ind == feature_dir.length() - 1 ? feature_dir + filename->d_name
-                                                           : feature_dir + "/" + filename->d_name;
+    std::string abs_path = ind == feature_dir.length() - 1
+                               ? feature_dir + filename->d_name
+                               : feature_dir + "/" + filename->d_name;
     // 判断是否为文件
     if (IsFile(abs_path)) {
       out_file_paths.push_back(abs_path);
@@ -84,22 +86,23 @@ static void GetDirAllFiles(std::string feature_dir, std::vector<std::string> &ou
   }
 }
 
-
-
 int main() {
-    std::vector<string> all_dirs;
-	GetAllDirectories("/home/SENSETIME/heyulin/dev/cstk/build/samples/body_cluster/result", all_dirs);
-    
-    for (auto& dir : all_dirs) {
-        cout << dir << endl;
-    }
+  std::vector<string> all_dirs;
+  GetAllDirectories(
+      "/home/SENSETIME/heyulin/dev/cstk/build/samples/body_cluster/result",
+      all_dirs);
 
-    std::vector<string> aa;
-	GetDirAllFiles("/home/SENSETIME/heyulin/dev/cstk/build/samples/body_cluster/result/day_0", aa);
-	for (auto& file : aa ) {
-		cout << file << endl;
-	}
+  for (auto &dir : all_dirs) {
+    cout << dir << endl;
+  }
 
-	return 0;
+  std::vector<string> aa;
+  GetDirAllFiles("/home/SENSETIME/heyulin/dev/cstk/build/samples/body_cluster/"
+                 "result/day_0",
+                 aa);
+  for (auto &file : aa) {
+    cout << file << endl;
+  }
+
+  return 0;
 }
-
