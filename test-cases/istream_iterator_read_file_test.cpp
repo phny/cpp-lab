@@ -10,7 +10,6 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include <string>
 
 using namespace std;
 
@@ -22,8 +21,8 @@ int main() {
   std::istream_iterator<string> dataEnd;
   std::vector<string> data(dataBegin, dataEnd);
 
-  for (auto& i : data) {
-      std::cout << i << std::endl;
+  for (auto &i : data) {
+    std::cout << i << std::endl;
   }
   std::cout << std::endl;
 

@@ -18,6 +18,7 @@ int main() {
   std::ostream_iterator<int> dataIter(dataFile, "\n");
 
   std::copy(data.begin(), data.end(), dataIter);
+  dataFile.close();
 
   return 0;
 }
