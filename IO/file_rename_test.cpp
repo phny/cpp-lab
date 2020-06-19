@@ -11,6 +11,8 @@
 
 using namespace std;
 
+// 不能跨盘重命名！！！
+
 int main() {
   string src_file = "/home/SENSETIME/heyulin/images/a_1.jpg";
   string dst_file = "/home/SENSETIME/heyulin/images/a.jpg";

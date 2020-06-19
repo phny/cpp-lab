@@ -4,6 +4,7 @@ project(cpp-learning)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -fPIC -mavx")
 
+# 是否使用 debug 编译
 IF (CMAKE_BUILD_TYPE)
     IF (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         message("****build in debug mode****")
@@ -30,7 +31,7 @@ ENDMACRO()
 SUBDIRLIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR})
 
 # 移除不相关的文件夹
-list(REMOVE_ITEM SUBDIRS ".git" ".vscode" "build")
+list(REMOVE_ITEM SUBDIRS ".git" ".vscode" "build" ".history")
 
 # 添加所有的子目录
 foreach(subdirectory  ${SUBDIRS})

@@ -9,10 +9,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   int data = 0;
-  std::ifsteam in_file("./test.bin", std::ios::binary);
+  std::ifstream in_file("./test.bin", std::ios::binary);
   if (in_file) {
     while (in_file.good() && !in_file.eof()) {
-      in_file.write((char *)&data, sizeof(int));
+      in_file.read((char *)&data, sizeof(int));
       cout << data << endl;
     }
   }
