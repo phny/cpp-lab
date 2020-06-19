@@ -16,22 +16,20 @@ using namespace std;
 int main() {
   int a[] = {1, 2, 3, 4, 5};
   ofstream out("hello.txt", std::ios_base::out);
-  ostream_iterator<int, char> iter_out(out, "\n");
-  // 将数组通过ostream_iterator保存到文件中
+  std::ostream_iterator<int> iter_out(out, "\n");
+  // 通过 std::ostream_iterator 保存到文件中
   std::copy(a, a + 4, iter_out);
-  out.flush();
   out.close();
   std::cout << "write finished" << std::endl;
 
-  // 通过istream_iterator将文件内容读取到数据中
-  ifstream in("hello.txt");
+  // 通过 std::istream_iterator 将文件内容读取到数组
+  std::ifstream in("hello.txt");
   std::vector<int> v;
-  std::copy(istream_iterator<int>(in), istream_iterator<int>(),
+  std::copy(std::istream_iterator<int>(in), std::istream_iterator<int>(),
             back_inserter(v));
 
-  for (auto &i : v) {
-    std::cout << i << std::endl;
-  }
+  // 输出读取到的元素
+  for_each(v.begin(), v.end(), [](const int i) { cout << i << endl; });
   std::cout << "read finished" << std::endl;
 
   return 0;
