@@ -8,11 +8,19 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <cerrno>
+#include <cstdio>
+#include <cstring>
 
 using namespace std;
 
 int main() {
-  string src_file = "/home/SENSETIME/heyulin/images/a_1.jpg";
-  string dst_file = "/home/SENSETIME/heyulin/images/a.jpg";
-  rename(src_file.c_str(), dst_file.c_str());
+  string src_file = "/data/tmp/feature_0.bin";
+  string dst_file = "/data/data/feature_0.bin";
+  // 不能跨盘移动文件
+    if (std::rename(src_file.c_str(), dst_file.c_str()) < 0) {
+        cout << " move file error" << strerror(errno) << endl;
+    } else {
+        cout << "move file success" << endl;
+    }
 }

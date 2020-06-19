@@ -15,7 +15,7 @@ using namespace std;
 
 int main() {
   int a[] = {1, 2, 3, 4, 5};
-  ofstream out("hello.txt", std::ios_base::out);
+  std::ofstream out("hello.txt", std::ios_base::out);
   std::ostream_iterator<int> iter_out(out, "\n");
   // 通过 std::ostream_iterator 保存到文件中
   std::copy(a, a + 4, iter_out);
