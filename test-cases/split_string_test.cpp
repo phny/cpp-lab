@@ -40,7 +40,7 @@ vector<string> split(const string &str, const string &delim) {
 
   char *p = strtok(strs, d);
   while (p) {
-    string s = p;     //分割得到的字符串转换为string类型
+    string s = p;     //分割得到的字符串转换为string型
     res.push_back(s); //存入结果数组
     p = strtok(NULL, d);
   }
