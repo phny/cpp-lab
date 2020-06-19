@@ -14,6 +14,8 @@
 
 using namespace std;
 
+// 不能跨盘重命名！！！
+
 int main() {
   string src_file = "/data/tmp/feature_0.bin";
   string dst_file = "/data/data/feature_0.bin";

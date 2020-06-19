@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(cpp-test-cases VERSION 0.1.0)
+project(multi-thread VERSION 0.1.0)
 
 option(DEBUG "debug or not" OFF)
 
@@ -25,7 +25,5 @@ foreach (mainfile IN LISTS mains)
     #Get file name without directory
     get_filename_component(mainname ${mainfile} NAME_WE) 
     add_executable(${mainname} ${mainfile}) 
-    if (${mainname} MATCHES  "yamlcpp_test")
-        target_link_libraries(${mainname} libyaml-cpp.so) 
-    endif()
+    # target_link_libraries(${mainname} ${CMAKE_THREAD_LIBS_INIT})
 endforeach()

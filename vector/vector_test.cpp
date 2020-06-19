@@ -11,6 +11,10 @@ using namespace std;
 #include <string>
 #include <vector>
 
+/*
+测试 vector 的基本使用方法
+*/
+
 class Person {
 public:
   Person(string name, int age) {
