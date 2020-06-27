@@ -11,7 +11,7 @@ void f1(int n) {
   }
 }
 
-void f2(int& n) {
+void f2(int &n) {
   for (int i = 0; i < 5; ++i) {
     std::cout << "Thread 2 executing\n";
     ++n;
@@ -20,7 +20,7 @@ void f2(int& n) {
 }
 
 class foo {
- public:
+public:
   void bar() {
     for (int i = 0; i < 5; ++i) {
       std::cout << "Thread 3 executing\n";
@@ -32,7 +32,7 @@ class foo {
 };
 
 class baz {
- public:
+public:
   void operator()() {
     for (int i = 0; i < 5; ++i) {
       std::cout << "Thread 4 executing\n";
@@ -47,13 +47,13 @@ int main() {
   int n = 0;
   foo f;
   baz b;
-  std::thread t1;                   // t1 is not a thread
-  std::thread t2(f1, n + 1);        // pass by value
-  std::thread t3(f2, std::ref(n));  // pass by reference
+  std::thread t1;                  // t1 is not a thread
+  std::thread t2(f1, n + 1);       // pass by value
+  std::thread t3(f2, std::ref(n)); // pass by reference
   std::thread t4(
-      std::move(t3));  // t4 is now running f2(). t3 is no longer a thread
-  std::thread t5(&foo::bar, &f);  // t5 runs foo::bar() on object f
-  std::thread t6(b);              // t6 runs baz::operator() on object b
+      std::move(t3)); // t4 is now running f2(). t3 is no longer a thread
+  std::thread t5(&foo::bar, &f); // t5 runs foo::bar() on object f
+  std::thread t6(b);             // t6 runs baz::operator() on object b
   t2.join();
   t4.join();
   t5.join();
