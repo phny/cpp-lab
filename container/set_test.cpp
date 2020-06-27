@@ -16,8 +16,11 @@ int main() {
   set<int> x1, x2, x;
   x1.insert(1);
   x1.insert(2);
+  x1.insert(3);
+  x1.insert(4);
+
   x2.insert(3);
-  x2.insert(2);
+  // x2.insert(2);
   //交集
   set_intersection(x1.begin(), x1.end(), x2.begin(), x2.end(),
                    inserter(x, x.begin()));
@@ -41,6 +44,7 @@ int main() {
   set_difference(x1.begin(), x1.end(), x2.begin(), x2.end(),
                  inserter(x, x.begin()));
   // x1相对于x2的差集
+  cout << "差集" << endl;
   it = x.begin();
   while (it != x.end()) {
     cout << *it << endl;
