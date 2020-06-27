@@ -9,15 +9,25 @@
 #include <chrono>
 #include <future>
 #include <iostream>
+#include <sstream>
 #include <thread>
 #include <vector>
 
 using namespace std;
 
 // 判断素数
-bool is_prime(int x) {
-  std::cout << "Calculating " << x << ", Please, wait...\n";
-  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+bool IsPrime(int x) {
+  // 获取当前线程的 id
+  int64_t current_thread_id = [] {
+    int64_t thread_id = 0;
+    std::stringstream ss;
+    ss << std::this_thread::get_id();
+    ss >> thread_id;
+    return thread_id;
+  }();
+  cout << "thread " << current_thread_id << " start" << endl;
+  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+
   for (int i = 2; i < x; ++i) {
     if (x % i == 0) {
       return false;
@@ -27,37 +37,39 @@ bool is_prime(int x) {
   return true;
 }
 
-// 往数组push值
-// 注意:  C++11的std::thread构造函数不支持std::ref的这种用法,
-// 所以使用指针代替引用！或者用std::bind、lambda等解决
-void PushToVec(std::vector<int64_t> *v, int n) {
-  cout << "generate use: " << n << endl;
-  // 待研究。。。
-  // std::future<void> fut = std::async(std::launch::async, [&] (const int n) {
-  //    for (int i = 0; i < n; i++) {
-  //        v->push_back(i);
-  //    }
-  //});
-  // fut.get();
+/// 线程当中又开启新的线程
+void PushToVec(std::vector<int64_t> &v, int n) {
+  std::future<void> fut = std::async(std::launch::async, [&v, n] {
+    // 获取当前线程的 id
+    int64_t current_thread_id = [] {
+      int64_t thread_id = 0;
+      std::stringstream ss;
+      ss << std::this_thread::get_id();
+      ss >> thread_id;
+      return thread_id;
+    }();
 
-  for (int i = 0; i < n; i++) {
-    v->push_back(i);
-  }
-  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    for (int i = 0; i < n; i++) {
+      v.push_back(i);
+    }
+    cout << "thread id: " << current_thread_id << " finsihed" << endl;
+  });
+  // 等待线程完成
+  fut.get();
 }
 
 int main() {
-  int64_t a = 313222313;
+  int64_t a = 313222313343441;
   int64_t b = 3132223343313;
   int64_t c = 9399488994337;
 
   // std::launch::async 要求线程立即启动
-  std::future<bool> a_fut = std::async(std::launch::async, is_prime, a);
-  std::future<bool> b_fut = std::async(std::launch::async, is_prime, b);
-  std::future<bool> c_fut = std::async(std::launch::async, is_prime, c);
+  std::future<bool> a_fut = std::async(std::launch::async, IsPrime, a);
+  std::future<bool> b_fut = std::async(std::launch::async, IsPrime, b);
+  std::future<bool> c_fut = std::async(std::launch::async, IsPrime, c);
 
   // 线程运行的同时主线程继续执行
-  cout << "Do other things" << endl;
+  cout << "Keep do other things" << endl;
 
   // 获取每个线程的执行结果
   bool a_ret = a_fut.get();
@@ -76,17 +88,28 @@ int main() {
     std::cout << b << " It is not prime.\n";
   }
 
+  if (c_ret) {
+    std::cout << c << " It is prime!\n";
+  } else {
+    std::cout << c << " It is not prime.\n";
+  }
+
+  // 往数组中push元素
   std::vector<int64_t> v1;
   std::vector<int64_t> v2;
 
-  std::future<void> v1_fut = std::async(std::launch::async, PushToVec, &v1, 10);
-  std::future<void> v2_fut = std::async(std::launch::async, PushToVec, &v2, 20);
+  std::future<void> v1_fut =
+      std::async(std::launch::async, PushToVec, std::ref(v1), 10);
+  std::future<void> v2_fut =
+      std::async(std::launch::async, PushToVec, std::ref(v2), 20);
 
   cout << "Keep do other things" << endl;
 
+  // 等带两个线程完成
   v1_fut.get();
   v2_fut.get();
 
+  // 输出结果
   for_each(v1.begin(), v1.end(), [](const int64_t i) { cout << i << " "; });
   cout << endl;
   for_each(v2.begin(), v2.end(), [](const int64_t i) { cout << i << " "; });
