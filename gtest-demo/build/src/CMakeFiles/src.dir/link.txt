@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libsrc.a  CMakeFiles/src.dir/calc.cpp.o CMakeFiles/src.dir/main.cpp.o CMakeFiles/src.dir/string_util.cpp.o
+/usr/bin/ranlib ../lib/libsrc.a

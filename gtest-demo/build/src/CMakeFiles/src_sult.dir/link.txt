@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/src_sult.dir/calc.cpp.o CMakeFiles/src_sult.dir/main.cpp.o CMakeFiles/src_sult.dir/string_util.cpp.o  -o ../src_sult 
