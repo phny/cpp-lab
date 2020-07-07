@@ -13,6 +13,11 @@ float add(float f1, float f2) { return f1 + f2; }
 
 double add(double a, double b) { return a + b; }
 
+// default arguments
+int sum(int a, int b = 100) {
+    return a + b;
+}
+
 // 类
 class Hello {
 public:
@@ -45,6 +50,7 @@ PYBIND11_MODULE(py2cpp, m) {
   m.def("add", [](const double a, const double b) {
     return a + b;
   });
+  m.def("sum", static_cast<int (*)(int, int)>(&sum), py::arg("a"), py::arg("b") = 100);
 
   py::class_<Hello>(m, "Hello")
       .def(py::init<>())
