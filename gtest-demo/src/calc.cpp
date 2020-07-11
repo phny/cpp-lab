@@ -1,12 +1,9 @@
 /*************************************************************************
-	> File Name: calc.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: 2020年07月01日 星期三 07时37分36秒
+        > File Name: calc.cpp
+        > Author:
+        > Mail:
+        > Created Time: 2020年07月01日 星期三 07时37分36秒
  ************************************************************************/
 
-# include "calc.h"
-int Calc::Add(int a, int b)
-{
-    return a+b;
-}
+#include "calc.h"
+int Calc::Add(int a, int b) { return a + b; }

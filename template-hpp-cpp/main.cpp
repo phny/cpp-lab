@@ -5,6 +5,6 @@
 using namespace std;
 
 int main() {
-    func(100);
-    return 0;
+  func(100);
+  return 0;
 }
