@@ -80,5 +80,14 @@ int main(int argc, char *argv[]) {
 
   Foo(100);
 
+  for (int i = 0; i < 10; i++) {
+    bool flag = true;
+    cout << "round: " << i << " start, flag is: " << flag << endl;
+    if (1) {
+      flag = false;
+    }
+    cout << "setted flag to " << flag << endl;
+  }
+
   return 0;
 }
