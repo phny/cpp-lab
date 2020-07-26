@@ -17,40 +17,37 @@ double add(double a, double b) { return a + b; }
 class Hello {
 public:
   Hello() {}
-  Hello(std::string name) {
-    this->name = name;
-  }
+  Hello(std::string name) { this->name = name; }
   Hello(std::string name, int age) {
     this->name = name;
     this->age = age;
   }
-  void say(const std::string s) { 
-    std::cout << s << std::endl; 
-  }
-  void good() {
-    std::cout << "this is a test" << std::endl;
-  }
+  void say(const std::string s) { std::cout << s << std::endl; }
+  void good() { std::cout << "this is a test" << std::endl; }
 
 private:
   std::string name;
   int32_t age;
 };
 
-
 PYBIND11_MODULE(py2cpp, m) {
   m.doc() = "pybind11 example";
+  // 绑定普通函数
   m.def("add", static_cast<int (*)(int, int)>(&add), "add two int number");
   m.def("add", static_cast<float (*)(float, float)>(&add),
         "add two float number");
-  m.def("add", [](const double a, const double b) {
-    return a + b;
+  m.def("add", [](const double a, const double b) { return a + b; });
+  // 绑定lambda表达式
+  m.def("Add", [](int a, int b) -> int {
+    int ret = add(a, b);
+    return ret;
   });
-
+  // 绑定类函数
   py::class_<Hello>(m, "Hello")
       .def(py::init<>())
       .def(py::init<std::string>())
       .def(py::init<std::string, int32_t>())
-      .def("say", static_cast<void(Hello::*)(const std::string)>(&Hello::say))
+      .def("say", static_cast<void (Hello::*)(const std::string)>(&Hello::say))
       // or
       // .def("good", static_cast<void (Hello::*)()>(&Hello::good));
       .def("good", &Hello::good);
