@@ -12,6 +12,10 @@ using namespace std;
 
 int main() {
   std::map<int, int> m;
+  if (m.find(22) == m.end()) {
+    std::cout << "not found 22 in m " << std::endl;
+  }
+
   m.insert({100, 1000});
 
   int ret = m.begin()->first;

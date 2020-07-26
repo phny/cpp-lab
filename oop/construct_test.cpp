@@ -1,8 +1,12 @@
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 class StupidClass {
+private:
   int flag;
+  std::vector<StupidClass *> vec;
 
 public:
   StupidClass(int flag) : flag(flag) { cout << "Constructor " << flag << endl; }
