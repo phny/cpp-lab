@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(multi-thread VERSION 0.1.0)
+project(ctypes-test VERSION 0.1.0)
 
 option(DEBUG "debug or not" OFF)
 
@@ -24,6 +24,7 @@ file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_
 foreach (mainfile IN LISTS mains)
     #Get file name without directory
     get_filename_component(mainname ${mainfile} NAME_WE) 
-    add_executable(${mainname} ${mainfile}) 
+    add_library(${mainname} SHARED ${mainfile}) 
+    # target_link_libraries(${mainname} ${CMAKE_THREAD_LIBS_INIT})
+    # file(COPY ${mainfile} DESTINATION /home/hyl)
 endforeach()
-

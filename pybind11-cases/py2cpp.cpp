@@ -78,27 +78,13 @@ PYBIND11_MODULE(py2cpp, m) {
   m.def("add", static_cast<float (*)(float, float)>(&add),
         "add two float number");
   m.def("add", [](const double a, const double b) { return a + b; });
-<<<<<<< HEAD
-  // 绑定lambda表达式
-  m.def("Add", [](int a, int b) -> int {
-    int ret = add(a, b);
-    return ret;
-  });
-  // 绑定类函数
-=======
   m.def("sum", static_cast<int (*)(int, int)>(&sum), py::arg("a"),
         py::arg("b") = 100);
 
->>>>>>> ed4382d6a2529feb1f928e02997d2cee0507ec57
   py::class_<Hello>(m, "Hello")
       .def(py::init<>())
       .def(py::init<std::string>())
       .def(py::init<std::string, int32_t>())
       .def("say", static_cast<void (Hello::*)(const std::string)>(&Hello::say))
-<<<<<<< HEAD
-      // or
-      // .def("good", static_cast<void (Hello::*)()>(&Hello::good));
-=======
->>>>>>> ed4382d6a2529feb1f928e02997d2cee0507ec57
       .def("good", &Hello::good);
 }
