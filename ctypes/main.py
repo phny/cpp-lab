@@ -29,6 +29,20 @@ def test():
         r = struct.unpack('q', ret_bytes[i*8:(i+1)*8])[0]
         print(r)
 
+    # enum test
+    print(sa.se_engine_e.ENGINE_FLAT)
+
+    # se_search_engine_config_t
+    c = sa.se_search_engine_config_t()
+    c.max_db_size = -1
+    c.feature_dim = 256
+    # c.dc_model = create_string_buffer(b'dc_model')
+    c.dc_model = "create_string_buffer(b'dc_model')"
+    c.cache_storage = sa.se_engine_e.ENGINE_FLAT
+
+    print(c.cache_storage)
+    print(c.dc_model)
+
 
 if __name__ == "__main__":
     test()

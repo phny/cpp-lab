@@ -2,6 +2,7 @@
 
 import ctypes
 import os
+from enum import IntEnum
 
 # Try to locate the .so file in the same directory as this file
 _file = 'libsample.so'
@@ -92,3 +93,26 @@ float_ptr_as_output.restype = None
 int64_ptr_as_output = _mod.int64_ptr_as_output
 int64_ptr_as_output.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_longlong))
 int64_ptr_as_output.restype = None
+
+# se_engine_e enum
+class se_engine_e(IntEnum):
+    ENGINE_UNKNOWN = -1
+    ENGINE_FLAT = 0
+    ENGINE_PQ = 1
+    ENGINE_DC = 2
+
+# se_feature_cache_storage_e enum
+class se_feature_cache_storage_e(IntEnum):
+    CACHE_ON_NONE = 0
+    CACHE_ON_MEM = 1
+    CACHE_ON_DISK = 2
+
+# SearchEngineConfig
+class se_search_engine_config_t(ctypes.Structure):
+    _fields_ = [
+        ('max_db_size', ctypes.c_ulonglong),
+        ('feature_dim', ctypes.c_int),
+        ('se_engine_e', ctypes.c_int),
+        ('de_model', ctypes.c_char_p),
+        ('cache_storage', ctypes.c_int)
+    ]

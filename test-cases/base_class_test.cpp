@@ -19,6 +19,10 @@ public:
   MyLink(const MyLink &other);
   // 赋值构造函数
   MyLink &operator=(const MyLink &other);
+  // 移动构造
+  MyLink(MyLink &&other);
+  // 移动赋值
+  MyLink &operator=(const MyLink &&other);
 
 private:
   char *m_data;
