@@ -19,7 +19,7 @@ find_package(PythonInterp 3 REQUIRED)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pybind11)
 
 include_directories(${PYTHON_INCLUDE_DIRS})
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/pybind11/")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/pybind11/)
 
 # Find all main *.cpp files and store in list mains
 file(GLOB mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
