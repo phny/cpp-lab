@@ -132,8 +132,18 @@ void int_ptr_as_output(int32_t n, int64_t *output) {
   }
 }
 
+/// @brief 自定义的类型
 typedef float *ScoresPtr;
 typedef int64_t *IndexesPtr;
+
+/// @brief 结构体指针作为函数的参数
+void struct_pointer_as_input_param(MyStruct *my_struct) {
+  std::cout << "a:" << my_struct->a << std::endl;
+  std::cout << "b:" << my_struct->b << std::endl;
+  std::cout << "c:" << my_struct->c << std::endl;
+  std::cout << "d:" << my_struct->d << std::endl;
+  std::cout << "f:" << my_struct->f << std::endl;
+}
 
 /// ---------------------------------
 
@@ -274,12 +284,16 @@ PYBIND11_MODULE(py2cpp, m) {
            },
            py::keep_alive<0, 1>());
 
-  /// @brief 暴露自定义的类型
+  /// @brief 暴露自定义类型1
   py::class_<void *>(m, "VoidPtr").def(py::init());
 
+  /// @brief 暴露自定义类型2
   py::class_<MyType>(m, "MyType")
       .def(py::init<>())
       .def_property(
           "a", [](const MyType &self) { return self.a; },
           [](MyType &self, const char *new_a) { self.a = strdup(new_a); });
+
+  /// @brief 结构体指针作为函数的输入参数
+  m.def("struct_pointer_as_input_param", &struct_pointer_as_input_param);
 }
