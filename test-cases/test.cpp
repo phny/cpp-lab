@@ -150,5 +150,6 @@ int main() {
   for (int i = 0; i < file_size / sizeof(float); i++) {
     std::cout << *(f + i) << std::endl;
   }
+
   return 0;
 }
