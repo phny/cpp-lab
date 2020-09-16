@@ -137,19 +137,32 @@ void float_ptr_as_output(int32_t n, float *output) {
   }
 }
 
-int main() {
-  std::string file_path =
-      "/home/SENSETIME/heyulin/dev/search_engine/unit_tests/test_data/"
-      "CI-TESTING-FEATURE24802/targets_db/target_db_120_256d.bin";
-  std::ifstream in_file(file_path, std::ios::binary);
-  int64_t file_size = GetFileSize(file_path);
-  char *con = new char[file_size];
-  in_file.read(con, file_size);
-  float *f = (float *)con;
+struct A {
+  const char* a;
+};
 
-  for (int i = 0; i < file_size / sizeof(float); i++) {
-    std::cout << *(f + i) << std::endl;
-  }
+struct A test() {
+  string s = "12345";
+  struct A* a =  new struct A;
+  (*a).a = strdup(s.c_str());
+  return *a;
+}
+
+int main() {
+  // std::string file_path =
+  //     "/home/SENSETIME/heyulin/dev/search_engine/unit_tests/test_data/"
+  //     "CI-TESTING-FEATURE24802/targets_db/target_db_120_256d.bin";
+  // std::ifstream in_file(file_path, std::ios::binary);
+  // int64_t file_size = GetFileSize(file_path);
+  // char *con = new char[file_size];
+  // in_file.read(con, file_size);
+  // float *f = (float *)con;
+
+  // for (int i = 0; i < file_size / sizeof(float); i++) {
+  //   std::cout << *(f + i) << std::endl;
+  // }
+  struct A a = test();
+  std::cout << a.a << std::endl;
 
   return 0;
 }
