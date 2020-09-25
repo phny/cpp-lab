@@ -143,23 +143,22 @@ struct A {
 };
 
 int main() {
-  std::vector<int32_t> ids = {1,2,3,4,5};
+  std::vector<int32_t> ids = {1, 2, 3, 4, 5};
   std::vector<struct A> arr(ids.size());
-  for (int i = 0; i <  ids.size(); i++) {
+  for (int i = 0; i < ids.size(); i++) {
     arr[i].id = ids[i];
   }
 
-  for (int i = 0 ;i < arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     std::cout << &(arr[i].id) << std::endl;
   }
 
-  for (int i = 0 ;i < arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     std::cout << &(ids[i]) << std::endl;
   }
 
   auto batch_num = 11 / 2;
   std::cout << batch_num << std::endl;
-  
 
   return 0;
 }

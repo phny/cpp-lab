@@ -46,7 +46,8 @@ void test_py_array2(py::array_t<float> &arr, int n) {
   }
 }
 
-/// @brief py::list 修改测试: 修改结果可以返回python端(python端申请好内存,使用:numpy array)
+/// @brief py::list 修改测试:
+/// 修改结果可以返回python端(python端申请好内存,使用:numpy array)
 void test_py_list(py::list &my_list, int n) {
   std::cout << my_list.size() << std::endl;
   for (int i = 0; i < my_list.size(); i++) {
@@ -54,7 +55,8 @@ void test_py_list(py::list &my_list, int n) {
   }
 }
 
-/// @brief py::list append测试: 修改结果不能返回到python端(python端申请好内存, 使用:numpy array)
+/// @brief py::list append测试: 修改结果不能返回到python端(python端申请好内存,
+/// 使用:numpy array)
 void test_py_list2(py::list &my_list, int n) {
   for (int i = 0; i < my_list.size(); i++) {
     my_list.append(i);
@@ -62,23 +64,21 @@ void test_py_list2(py::list &my_list, int n) {
 }
 
 /// @brief py::dict 测试
-void py_dict_test(py::dict& dict) {
-
-}
+void py_dict_test(py::dict &dict) {}
 
 // py::array_t<py::array_t<float>>测试
 // void array_of_array(py::array_t<py::array_t<float>>& arr) {
-  // int rows = arr.size();
-  // int cols = arr.at(0).size();
-  // const float* f = arr.mutable_at(0).data();
-  // for (int i = 0; i < rows * cols; i++) {
-  //   std::cout << *(f + i) << std::endl;
-  // }
+// int rows = arr.size();
+// int cols = arr.at(0).size();
+// const float* f = arr.mutable_at(0).data();
+// for (int i = 0; i < rows * cols; i++) {
+//   std::cout << *(f + i) << std::endl;
+// }
 // }
 
-
-void test_opaque_array(py::array_t<float, py::array::c_style | py::array::forcecast>& arr) {
-  if (arr.owndata() ) {
+void test_opaque_array(
+    py::array_t<float, py::array::c_style | py::array::forcecast> &arr) {
+  if (arr.owndata()) {
     std::cout << "own data" << std::endl;
   }
   float f = 0.0;
@@ -90,7 +90,6 @@ void test_opaque_array(py::array_t<float, py::array::c_style | py::array::forcec
     }
   }
 }
-
 
 /// --------------------------------------------------------
 
@@ -122,8 +121,6 @@ PYBIND11_MODULE(pyarray, m) {
   /// @brief test py::list
   // m.def("array_of_array", &array_of_array);
 
-    /// @brief test_opaque_array
+  /// @brief test_opaque_array
   m.def("test_opaque_array", &test_opaque_array);
-
-  
 }
