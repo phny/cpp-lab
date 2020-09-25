@@ -137,18 +137,29 @@ void float_ptr_as_output(int32_t n, float *output) {
   }
 }
 
-int main() {
-  std::string file_path =
-      "/home/SENSETIME/heyulin/dev/search_engine/unit_tests/test_data/"
-      "CI-TESTING-FEATURE24802/targets_db/target_db_120_256d.bin";
-  std::ifstream in_file(file_path, std::ios::binary);
-  int64_t file_size = GetFileSize(file_path);
-  char *con = new char[file_size];
-  in_file.read(con, file_size);
-  float *f = (float *)con;
+struct A {
+  int32_t id;
+  string name;
+};
 
-  for (int i = 0; i < file_size / sizeof(float); i++) {
-    std::cout << *(f + i) << std::endl;
+int main() {
+  std::vector<int32_t> ids = {1,2,3,4,5};
+  std::vector<struct A> arr(ids.size());
+  for (int i = 0; i <  ids.size(); i++) {
+    arr[i].id = ids[i];
   }
+
+  for (int i = 0 ;i < arr.size(); i++) {
+    std::cout << &(arr[i].id) << std::endl;
+  }
+
+  for (int i = 0 ;i < arr.size(); i++) {
+    std::cout << &(ids[i]) << std::endl;
+  }
+
+  auto batch_num = 11 / 2;
+  std::cout << batch_num << std::endl;
+  
+
   return 0;
 }

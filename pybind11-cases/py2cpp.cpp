@@ -86,7 +86,7 @@ struct a_t {
   int b[10];
 };
 
-/// @brief void * 作为函数的参数
+/// @brief void* 作为函数的参数
 void foo_null(void *p) { std::cout << p << std::endl; }
 
 /// @brief char* 作为函数的参数
@@ -99,7 +99,7 @@ void print_char_str(const char *c) {
 char *return_char_ptr() { return (char *)"1234567890"; }
 
 /// @brief float* 作为函数的参数
-void float_ptr_func(float *f_ptr, int n) {
+void float_ptr_func(const float *f_ptr, int n) {
   std::cout << std::setiosflags(ios::fixed) << std::endl;
   for (int i = 0; i < n; i++) {
     std::cout << *(f_ptr + i) << std::endl;
@@ -107,7 +107,7 @@ void float_ptr_func(float *f_ptr, int n) {
 }
 
 /// @brief int64_t* 作为函数的参数
-void int_ptr_func(int64_t *i_ptr, int n) {
+void int_ptr_func(const int64_t *i_ptr, int n) {
   std::cout << std::setiosflags(ios::fixed) << std::endl;
   for (int i = 0; i < n; i++) {
     std::cout << *(i_ptr + i) << std::endl;

@@ -7,17 +7,37 @@
 
 #include <iostream>
 #include <map>
+#include <unordered_map>
+#include <vector>
+
 
 using namespace std;
 
-int main() {
-  map<int, int> m;
-  m.insert(make_pair(2, 2));
-  m.insert(make_pair(1, 1));
-  m.insert(make_pair(3, 3));
-  m.insert(make_pair(5, 5));
+void MapTest() {
+  std::map<std::tuple<int32_t, int32_t>, float> m;
+  m.insert({std::make_tuple(1, 2), 100});
+  m.insert({std::make_tuple(2, 3), 200});
+  m.insert({std::make_tuple(3, 4), 300});
+  m.insert({std::make_tuple(4, 5), 400});
+  m.insert({std::make_tuple(5, 6), 500});
+  
+  if (m.find(std::make_tuple(1, 2)) != m.end()) {
+    std::cout << m[std::make_tuple(1, 2)] << std::endl;
+  }
 
-  for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++) {
-    cout << it->first << it->second << endl;
+  std::vector<std::tuple<int32_t, int32_t, float>> t = {
+            std::make_tuple(1, 2, 1.2),
+            std::make_tuple(2, 2, 2.2),
+            std::make_tuple(3, 2, 3.2)
+            };
+
+}
+
+int main() {
+  for (int i = 1; i <= 3; i++ ) {
+    for (int j = 1; j <=3; j++) {
+      int32_t a = (i << 7) | j;
+      std::cout << a << std::endl;
+    }
   }
 }
