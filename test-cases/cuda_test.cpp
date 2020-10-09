@@ -40,7 +40,7 @@ faiss::gpu::StandardGpuResources *CudaAllocator(int device_id) {
 
   // 获取当前线程的id
   std::thread::id tid = std::this_thread::get_id();
-  std::cout << "current thread id =" << tid << std::endl;
+  std::cout << "current thread id = " << tid << std::endl;
 
   DeviceScope scope(device_id);
 
@@ -66,11 +66,12 @@ int main() {
   std::future<faiss::gpu::StandardGpuResources *> f3 =
       std::async(std::launch::async, CudaAllocator, 5);
 
+  // 获取线程执行函数的返回值
   auto *g1 = f1.get();
   auto *g2 = f2.get();
   auto *g3 = f3.get();
 
-  std::cout << "finished get device" << std::endl;
+  std::cout << "finished set device" << std::endl;
 
   sleep(3);
 
@@ -86,7 +87,7 @@ int main() {
     device++;
   }
 
-  std::cout << "after delete cuda handle resource" << std::endl;
+  std::cout << "finished release device" << std::endl;
 
   sleep(100);
 
