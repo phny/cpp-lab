@@ -4,6 +4,8 @@
 #include <utility>
 
 void f1(int n) {
+  std::thread::id tid = std::this_thread::get_id();
+  std::cout << "f id=" << tid << std::endl;
   for (int i = 0; i < 5; ++i) {
     std::cout << "Thread 1 executing\n";
     ++n;
@@ -12,6 +14,8 @@ void f1(int n) {
 }
 
 void f2(int &n) {
+  std::thread::id tid = std::this_thread::get_id();
+  std::cout << "f id=" << tid << std::endl;
   for (int i = 0; i < 5; ++i) {
     std::cout << "Thread 2 executing\n";
     ++n;
@@ -22,6 +26,8 @@ void f2(int &n) {
 class foo {
 public:
   void bar() {
+    std::thread::id tid = std::this_thread::get_id();
+    std::cout << "f id=" << tid << std::endl;
     for (int i = 0; i < 5; ++i) {
       std::cout << "Thread 3 executing\n";
       ++n;
@@ -34,6 +40,8 @@ public:
 class baz {
 public:
   void operator()() {
+    std::thread::id tid = std::this_thread::get_id();
+    std::cout << "f id=" << tid << std::endl;
     for (int i = 0; i < 5; ++i) {
       std::cout << "Thread 4 executing\n";
       ++n;
