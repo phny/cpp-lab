@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(multi-thread VERSION 0.1.0)
-
 option(DEBUG "debug or not" OFF)
 
 if (DEBUG) 
@@ -15,6 +13,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -fPIC -mavx")
 
 find_package(Threads REQUIRED) 
 include_directories("${PROJECT_BINARY_DIR}")
+include_directories(${PROJECT_SOURCE_DIR})
+message(${PROJECT_SOURCE_DIR})
 
 # 查找线程库
 FIND_PACKAGE(Threads REQUIRED)
