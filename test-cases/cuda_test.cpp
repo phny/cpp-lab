@@ -55,6 +55,9 @@ faiss::gpu::StandardGpuResources *CudaAllocator(int device_id) {
   faiss::gpu::GpuIndexIVFPQ *pq_index = new faiss::gpu::GpuIndexIVFPQ(
       gpu_resource, 256, 1024, 32, 8, faiss::METRIC_L2, gpu_index_config);
 
+  pq_index->display();
+  std::cout << pq_index->getNumLists() << std::endl;
+  std::cout << pq_index->getNumProbes() << std::endl;
   return gpu_resource;
 }
 
