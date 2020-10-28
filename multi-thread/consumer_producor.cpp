@@ -16,12 +16,13 @@ void producer(int n) {
       std::lock_guard<std::mutex> lk(mx);
       q.push(i);
       std::cout << "pushing " << i << std::endl;
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+      cv.notify_all();
     }
-    cv.notify_all();
   }
   {
     std::lock_guard<std::mutex> lk(mx);
-    // finished = true;
+    finished = true;
   }
   cv.notify_all();
 }
@@ -40,9 +41,9 @@ void consumer() {
 }
 
 int main() {
-  std::thread t1(producer, 10);
-  std::thread t2(consumer);
-  t1.join();
-  t2.join();
+  std::thread p(producer, 10);
+  std::thread c(consumer);
+  c.detach();
+  p.join();
   std::cout << "finished!" << std::endl;
 }

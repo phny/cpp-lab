@@ -2,6 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <utility>
+#include <vector>
 
 void f1(int n) {
   std::thread::id tid = std::this_thread::get_id();
@@ -68,4 +69,19 @@ int main() {
   t6.join();
   std::cout << "Final value of n is " << n << '\n';
   std::cout << "Final value of foo::n is " << f.n << '\n';
+
+  std::vector<int> v;
+  auto t = std::thread(
+      [&v](int n) {
+        std::cout << "thread use lambda" << std::endl;
+        for (int i = 0; i < n; i++) {
+          v.push_back(i);
+        }
+      },
+      10);
+  t.join();
+
+  for (auto i : v) {
+    std::cout << i << std::endl;
+  }
 }

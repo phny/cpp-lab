@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
   // std::async( std::launch::async, sleep, 5 ); // 临时对象被析构，阻塞
   // 5s,两个线程一共阻塞 10s
 
-  auto f1 = std::async(std::launch::async, sleep, 5); // 两个线程一共阻塞 5s
-  auto f2 = std::async(std::launch::async, sleep, 5);
+  auto f1 = std::async(std::launch::async, sleep, 2); // 两个线程一共阻塞 2s
+  auto f2 = std::async(std::launch::async, sleep, 2);
 
   return 0;
 }

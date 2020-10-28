@@ -15,17 +15,14 @@
 
 using namespace std;
 
+std::mutex mx;
+
 // 判断素数
 bool IsPrime(int x) {
-  // 获取当前线程的 id
-  int64_t current_thread_id = [] {
-    int64_t thread_id = 0;
-    std::stringstream ss;
-    ss << std::this_thread::get_id();
-    ss >> thread_id;
-    return thread_id;
-  }();
-  cout << "thread " << current_thread_id << " start" << endl;
+  {
+    std::unique_lock<std::mutex> lock(mx);
+    cout << "thread " << std::this_thread::get_id() << " start" << endl;
+  }
   std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
   for (int i = 2; i < x; ++i) {
@@ -40,19 +37,10 @@ bool IsPrime(int x) {
 /// 线程当中又开启新的线程
 void PushToVec(std::vector<int64_t> &v, int n) {
   std::future<void> fut = std::async(std::launch::async, [&v, n] {
-    // 获取当前线程的 id
-    int64_t current_thread_id = [] {
-      int64_t thread_id = 0;
-      std::stringstream ss;
-      ss << std::this_thread::get_id();
-      ss >> thread_id;
-      return thread_id;
-    }();
-
     for (int i = 0; i < n; i++) {
       v.push_back(i);
     }
-    cout << "thread id: " << current_thread_id << " finsihed" << endl;
+    cout << "thread id: " << std::this_thread::get_id() << " finish" << endl;
   });
   // 等待线程完成
   fut.get();
@@ -69,6 +57,7 @@ int main() {
   std::future<bool> c_fut = std::async(std::launch::async, IsPrime, c);
 
   // 线程运行的同时主线程继续执行
+  std::this_thread::sleep_for(std::chrono::seconds(1));
   cout << "Keep do other things" << endl;
 
   // 获取每个线程的执行结果
@@ -103,6 +92,7 @@ int main() {
   std::future<void> v2_fut =
       std::async(std::launch::async, PushToVec, std::ref(v2), 20);
 
+  std::this_thread::sleep_for(std::chrono::seconds(1));
   cout << "Keep do other things" << endl;
 
   // 等带两个线程完成
