@@ -63,8 +63,12 @@ int main(int argc, char *argv[]) {
 
   // add features
   cout << "add features.." << endl;
-  // index->add(feature_num, features_ptr);
-  index->add_with_ids(feature_num, features_ptr, ids_ptr);
+  {
+    TimeAccumulator timer("time of add");
+    // index->add(feature_num, features_ptr);
+    index->add_with_ids(feature_num, features_ptr, ids_ptr);
+  }
+  
   cout << "finish add features.." << endl;
   cout << index->ntotal << endl;
 
@@ -75,7 +79,7 @@ int main(int argc, char *argv[]) {
   int64_t topk = 64;
   {
     TimeAccumulator timer("time of search");
-    index->search(1, features_ptr, topk, distance, labels);
+    index->search(10, features_ptr, topk, distance, labels);
   }
   cout << "finish search.." << endl;
 
