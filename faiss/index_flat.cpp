@@ -114,9 +114,11 @@ int main(int argc, char *argv[]) {
                      distance);
   }
 
+  delete[] ids_ptr;
+  delete[] features_ptr;
+  delete faiss_index;
   delete index;
-  delete ids_ptr;
-  delete features_ptr;
+  delete[] removed_ids;
 
   return 0;
 }
