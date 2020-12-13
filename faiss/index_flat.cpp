@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 
   // train index
   cout << "train index.." << endl;
-  index->train(feature_num, features_ptr);
+  // index->train(feature_num, features_ptr);
   cout << "finish train index.." << endl;
 
   // add features
