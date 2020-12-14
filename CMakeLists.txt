@@ -11,7 +11,7 @@ IF (CMAKE_BUILD_TYPE)
         SET(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
         SET(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1)
         SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -std=c++11 -g -ggdb -O0 --coverage -fprofile-arcs -ftest-coverage")
-        SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -ggdb -O0 --coverage -fprofile-arcs -ftest-coverage")
+        SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -ggdb -O0 -fsanitize=address -llsan --coverage -fprofile-arcs -ftest-coverage")
     ENDIF()
 ENDIF()
 

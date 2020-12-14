@@ -4,10 +4,15 @@ cmake_minimum_required(VERSION 3.5)
 
 option(DEBUG "debug or not" OFF)
 
-if (DEBUG) 
+if (CMAKE_BUILD_TYPE) 
+    message("build in debug mode")
     ADD_DEFINITIONS(-DDEBUG) 
     SET(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -g")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer") 
+    SET(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
+    SET(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1)
+    SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -std=c++11 -g -ggdb -O0 --coverage -fprofile-arcs -ftest-coverage")
+    SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -ggdb -O0 -fsanitize=address -llsan --coverage -fprofile-arcs -ftest-coverage")
 endif()
 
 set(CMAKE_CXX_STANDARD 11) 

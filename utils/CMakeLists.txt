@@ -8,7 +8,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(srcs 
     ${CMAKE_CURRENT_SOURCE_DIR}/io_utils.hpp 
-    ${CMAKE_CURRENT_SOURCE_DIR}/date_utils.hpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/date_utils.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/random_utils.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/string_utils.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/thread_safe_queue.hpp)
 
 # 获取当前文件夹的名字
 # GET_FILENAME_COMPONENT(dir_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)

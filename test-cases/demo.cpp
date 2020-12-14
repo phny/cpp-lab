@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "utils/io_utils.hpp"
+#include "utils/string_utils.hpp"
 
 using namespace std;
 /*
@@ -159,6 +160,25 @@ int main() {
 
   auto batch_num = 11 / 2;
   std::cout << batch_num << std::endl;
+
+  std::cout << "****************" << std::endl;
+  std::vector<int> vv = {1, 2, 3, 4, 1, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 2, 2};
+  std::cout << vv.size() << std::endl;
+  vv.clear();
+  std::cout << vv.size() << std::endl;
+
+  string s = "1929393: 83884: 9993:99344:1:2334:";
+  std::vector<float> res;
+  StringSplit<float>(s, ":", res);
+  for (auto i : res) {
+    std::cout << i << std::endl;
+  }
+
+  std::vector<int64_t> v{10, 2, 14, 23};
+  bool ret =
+      std::all_of(v.begin(), v.end(), [](int64_t i) { return i % 2 == 0; });
+
+  std::cout << ret << std::endl;
 
   return 0;
 }

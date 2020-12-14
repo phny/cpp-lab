@@ -29,11 +29,16 @@ void MapTest() {
       std::make_tuple(3, 2, 3.2)};
 }
 
-int main() {
-  for (int i = 1; i <= 3; i++) {
-    for (int j = 1; j <= 3; j++) {
-      int32_t a = (i << 7) | j;
-      std::cout << a << std::endl;
-    }
+void MapTest2() {
+  std::map<int64_t, std::pair<int64_t, int64_t>> m;
+  m.insert({2, std::make_pair(2, 3)});
+  for (auto it = m.begin(); it != m.end(); ++it) {
+    cout << it->first << ":" << it->second.first << it->second.second << endl;
   }
+}
+
+int main() {
+  MapTest2();
+
+  return 0;
 }

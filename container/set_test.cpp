@@ -14,12 +14,8 @@ using namespace std;
 int main() {
   freopen("in.txt", "r", stdin);
   set<int> x1, x2, x;
-  x1.insert(1);
-  x1.insert(2);
-  x1.insert(3);
-  x1.insert(4);
-
-  x2.insert(3);
+  x1.insert({1, 2, 3, 4, 5});
+  x2.insert({1, 2, 3});
   // x2.insert(2);
   //交集
   set_intersection(x1.begin(), x1.end(), x2.begin(), x2.end(),
@@ -41,8 +37,8 @@ int main() {
   }
   //差集
   x.clear();
-  set_difference(x1.begin(), x1.end(), x2.begin(), x2.end(),
-                 inserter(x, x.begin()));
+  std::set_difference(x1.begin(), x1.end(), x2.begin(), x2.end(),
+                      inserter(x, x.begin()));
   // x1相对于x2的差集
   cout << "差集" << endl;
   it = x.begin();

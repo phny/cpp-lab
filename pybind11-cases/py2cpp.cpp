@@ -296,4 +296,10 @@ PYBIND11_MODULE(py2cpp, m) {
 
   /// @brief 结构体指针作为函数的输入参数
   m.def("struct_pointer_as_input_param", &struct_pointer_as_input_param);
+
+  /// @brief 返回自定义类型
+  m.def("return_self_define_type", []() -> struct MyStruct {
+    struct MyStruct a;
+    return a;
+  });
 }
