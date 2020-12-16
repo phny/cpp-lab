@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(multi-thread VERSION 0.1.0)
-
-option(DEBUG "debug or not" OFF)
-
-if (DEBUG) 
+if (CMAKE_BUILD_TYPE) 
     ADD_DEFINITIONS(-DDEBUG) 
     SET(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -g")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer") 

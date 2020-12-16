@@ -14,26 +14,26 @@ const double      *const    ptr    // 常量指针指向常量对象，指针指
 */
 // clang-format on
 
-void TestFunc1() { 
-    double d = 3.14159;
-    double a = 2.0;
+void TestFunc1() {
+  double d = 3.14159;
+  double a = 2.0;
 
-    double* ptr0 = &d;
-    *ptr0 = 3.15;
+  double *ptr0 = &d;
+  *ptr0 = 3.15;
 
-    const double * ptr1 = &d;
-    // *ptr1 = 3.15; // error
+  const double *ptr1 = &d;
+  // *ptr1 = 3.15; // error
 
-    double *const ptr2 = &d;
-    // ptr2 = &a; // error
+  double *const ptr2 = &d;
+  // ptr2 = &a; // error
 
-    const double *const ptr3 = &d;
-    // *ptr3 = 9.0; // error
-    // ptr3 = &a; // error
+  const double *const ptr3 = &d;
+  // *ptr3 = 9.0; // error
+  // ptr3 = &a; // error
 }
 
-int main(int argc, char* argv[]) {
-    TestFunc1();
+int main(int argc, char *argv[]) {
+  TestFunc1();
 
-    return 0;
+  return 0;
 }

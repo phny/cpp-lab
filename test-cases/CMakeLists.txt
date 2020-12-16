@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-# project(cpp-test-cases VERSION 0.1.0) # 会影响 PROJECT_SOURCE_DIR
-
-option(DEBUG "debug or not" OFF)
-
 if (CMAKE_BUILD_TYPE) 
-    message("build in debug mode")
     ADD_DEFINITIONS(-DDEBUG) 
     SET(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -g")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer") 

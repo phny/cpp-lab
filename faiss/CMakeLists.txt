@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-option(DEBUG "debug or not" OFF)
-
-if (DEBUG) 
+if (CMAKE_BUILD_TYPE) 
     ADD_DEFINITIONS(-DDEBUG) 
     SET(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -g")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer") 
@@ -17,9 +15,8 @@ SET(OTHER_DEPENDENCIES "")
 
 # 查找线程库
 find_package(Threads REQUIRED) 
-include_directories("${PROJECT_BINARY_DIR}")
+include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
-message(${PROJECT_SOURCE_DIR})
 LIST(APPEND OTHER_DEPENDENCIES ${CMAKE_THREAD_LIBS_INIT})
 
 # faiss 的依赖
@@ -31,10 +28,10 @@ LIST(APPEND OTHER_DEPENDENCIES ${FAISS_LIBRARIES})
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_SOURCE_DIR}/utils)
 
 
-#Find all main *.cpp files and store in list mains
+# Find all main *.cpp files and store in list mains
 file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach (mainfile IN LISTS mains)
-    #Get file name without directory
+    # Get file name without directory
     get_filename_component(mainname ${mainfile} NAME_WE) 
     add_executable(${mainname} ${mainfile}) 
     target_link_libraries(${mainname} ${OTHER_DEPENDENCIES})
