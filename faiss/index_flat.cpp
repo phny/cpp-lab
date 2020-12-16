@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
     // index->add(feature_num, features_ptr);
     index->add_with_ids(feature_num, features_ptr, ids_ptr);
   }
-  
+
   cout << "finish add features.." << endl;
   cout << index->ntotal << endl;
 
@@ -91,12 +91,12 @@ int main(int argc, char *argv[]) {
   }
 
   long *removed_ids = new long[6];
-  removed_ids[0] = 1;
-  removed_ids[1] = 196033;
-  removed_ids[2] = 55948;
-  removed_ids[3] = 105925;
-  removed_ids[4] = 78278;
-  removed_ids[5] = 22833;
+  removed_ids[0] = 39599;
+  removed_ids[1] = 19490;
+  removed_ids[2] = 39005;
+  removed_ids[3] = 36695;
+  removed_ids[4] = 20595;
+  removed_ids[5] = 28865;
   faiss::IDSelectorBatch sel(6, removed_ids);
   cout << "remove ids.." << endl;
   {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
   {
     // search after remove
     TimeAccumulator timer("time of search");
-    index->search(1, features_ptr, topk, distance, labels);
+    index->search(10, features_ptr, topk, distance, labels);
   }
   // save remove search result
   {

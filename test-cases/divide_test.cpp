@@ -7,11 +7,32 @@
 
 #include <iomanip>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
+void test(int64_t n, long *&ids);
+
 int main(int argc, char *argv[]) {
-  setprecision(10);
-  double a = static_cast<double>(1) / 23;
-  std::cout << a << std::endl;
+
+  // long* l = new long[4];
+  // long * p = l;
+  // for (int64_t i = 0; i < 4; i++) {
+  //   test(i, p);
+  //   p++;
+  // }
+  // for (int64_t i = 0; i < 4; i++) {
+  //   std::cout << l[i] << std::endl;
+  // }
+
+  std::vector<int64_t> v = {1, 2, 3, 4, 5};
+  v.resize(2);
+  for (auto i : v) {
+    cout << i << " ";
+  }
+}
+
+void test(int64_t n, long *&ids) {
+  *ids = n;
+  std::cout << n << ":" << *ids << std::endl;
 }
