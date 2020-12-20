@@ -12,21 +12,25 @@
 using namespace std;
 
 int main() {
-  std::vector<int> v1 = {1, 2, 3, 4, 5};
-  auto it = v1.begin();
-  std::cout << *(it + 2) << std::endl;
-
   std::map<int, int> m1;
   m1[0] = 0;
   m1[1] = 1;
   m1[2] = 2;
   m1[3] = 3;
-  auto m_it = m1.begin();
-  // std::cout << *(m_it + 2).first << std::endl; invalid
-  for (int i = 0; i < 2; i++) {
-    m_it++;
+  m1[4] = 4;
+  m1[5] = 5;
+  std::vector<int> remove_values = {2, 4, 9, 3, 3};
+  for (auto val : remove_values) {
+    auto it = m1.find(val);
+    if (it == m1.end()) {
+      continue;
+    }
+    m1.erase(it);
   }
-  std::cout << "first: " << m_it->first << "second: " << m_it->second
-            << std::endl;
+
+  for (auto it = m1.begin(); it != m1.end(); ++it) {
+    cout << it->first << ":" << it->second << endl;
+  }
+
   return 0;
 }
