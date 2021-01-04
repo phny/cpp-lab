@@ -26,6 +26,9 @@ FIND_PACKAGE(Threads REQUIRED)
 # 查找 cuda 依赖
 FIND_PACKAGE(CUDA 8 REQUIRED)
 
+include_directories("/home/SENSETIME/heyulin/.conan/data/kestrel/1.5.9/kestrel/stable/package/62c92bac57ca61bb4b71fb5095673e75cff773e1/include")
+link_directories("/home/SENSETIME/heyulin/.conan/data/kestrel/1.5.9/kestrel/stable/package/62c92bac57ca61bb4b71fb5095673e75cff773e1/lib")
+
 # Find all main *.cpp files and store in list mains
 file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach (mainfile IN LISTS mains)
@@ -37,5 +40,9 @@ foreach (mainfile IN LISTS mains)
     endif()
     if (${mainname} MATCHES "cuda_test")
         target_link_libraries(${mainname} ${CUDA_LIBRARIES} ${CUDA_CUBLAS_LIBRARIES} ${FAISS_LIBRARIES})
+    endif()
+
+    if (${mainname} MATCHES "demo1")
+        target_link_libraries(${mainname} libkestrel.so libkestrel_core.so)
     endif()
 endforeach()

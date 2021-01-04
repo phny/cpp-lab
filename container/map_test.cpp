@@ -37,8 +37,25 @@ void MapTest2() {
   }
 }
 
-int main() {
-  MapTest2();
+void MapTest3() {
+  std::unordered_map<int64_t, int32_t> m;
+  std::vector<int64_t> cluster_ids = {1, 1, 2, 3, 4, 4, 4, 5, 5, 6};
+  for (size_t i = 0; i < cluster_ids.size(); i++) {
+    if (m.find(cluster_ids[i]) == m.end()) {
+      m.insert({cluster_ids[i], 1});
+    } else {
+      m[cluster_ids[i]]++;
+    }
+  }
 
+  for (auto it = m.begin(); it != m.end(); ++it) {
+    cout << it->first << ":" << it->second << endl;
+  }
+}
+
+int main() {
+  // MapTest2();
+
+  MapTest3();
   return 0;
 }
