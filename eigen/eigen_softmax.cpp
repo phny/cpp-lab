@@ -7,7 +7,8 @@ using namespace std;
 using namespace Eigen;
 
 /// @brief 对矩阵softmax
-void SoftMax(MatrixXd &input, MatrixXd &output) {
+void SoftMax(Matrix<float, Dynamic, Dynamic, RowMajor> &input,
+             Matrix<float, Dynamic, Dynamic, RowMajor> &output) {
   // find max element
   float max = input(0, 0);
   for (size_t i = 0; i < input.rows(); i++) {
@@ -17,7 +18,7 @@ void SoftMax(MatrixXd &input, MatrixXd &output) {
     }
   }
   // sub max
-  MatrixXd tmp(input.rows(), input.cols());
+  Matrix<float, Dynamic, Dynamic, RowMajor> tmp(input.rows(), input.cols());
   float sum = input(0, 0) - input(0, 0);
   for (size_t i = 0; i < input.rows(); i++) {
     for (size_t j = 0; j < input.cols(); j++) {
@@ -33,8 +34,8 @@ void SoftMax(MatrixXd &input, MatrixXd &output) {
   }
 }
 
-void MatrixXdMul() {
-  MatrixXd input(2, 3);
+void MatrixMul() {
+  Matrix<float, Dynamic, Dynamic, RowMajor> input(2, 3);
   input(0, 0) = 1;
   input(0, 1) = 2;
   input(0, 2) = 3;
@@ -42,7 +43,7 @@ void MatrixXdMul() {
   input(1, 1) = 5;
   input(1, 2) = 6;
 
-  MatrixXd input1(3, 2);
+  Matrix<float, Dynamic, Dynamic, RowMajor> input1(3, 2);
   input1(0, 0) = 1;
   input1(0, 1) = 2;
   input1(1, 0) = 3;
@@ -53,9 +54,9 @@ void MatrixXdMul() {
   cout << (input * input1) << endl;
 }
 
-void MatrixXdSoftMax() {
-  MatrixXd input(2, 3);
-  MatrixXd output(2, 3);
+void MatrixSoftMax() {
+  Matrix<float, Dynamic, Dynamic, RowMajor> input(2, 3);
+  Matrix<float, Dynamic, Dynamic, RowMajor> output(2, 3);
 
   input(0, 0) = 1;
   input(0, 1) = 2;
@@ -71,7 +72,10 @@ void MatrixXdSoftMax() {
 }
 
 int main(int argc, char *argv[]) {
-  MatrixXdMul();
+
+  MatrixSoftMax();
+
+  // MatrixMul();
 
   return 0;
 }
