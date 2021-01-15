@@ -6,8 +6,11 @@ filelist=`git ls-files`
 
 # return 0: format, return 1: not format
 function checkCPP(){
+    # sub string filtering
+    if  [[ $1 =~ "eigen/eigen3" ]];then
+      return 1
     # source file
-    if [[ $1 == *.cc ]];then
+    elif [[ $1 == *.cc ]];then
 		  return 0
     elif [[ $1 == *.cpp ]];then
 		  return 0
