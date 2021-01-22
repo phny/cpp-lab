@@ -10,6 +10,7 @@
 #include "utils/string_utils.hpp"
 
 using namespace std;
+
 /*
 int main() {
   std::vector<int> nb_left;
@@ -144,41 +145,8 @@ struct A {
 };
 
 int main() {
-  std::vector<int32_t> ids = {1, 2, 3, 4, 5};
-  std::vector<struct A> arr(ids.size());
-  for (int i = 0; i < ids.size(); i++) {
-    arr[i].id = ids[i];
-  }
 
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << &(arr[i].id) << std::endl;
-  }
-
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << &(ids[i]) << std::endl;
-  }
-
-  auto batch_num = 11 / 2;
-  std::cout << batch_num << std::endl;
-
-  std::cout << "****************" << std::endl;
-  std::vector<int> vv = {1, 2, 3, 4, 1, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 2, 2};
-  std::cout << vv.size() << std::endl;
-  vv.clear();
-  std::cout << vv.size() << std::endl;
-
-  string s = "1929393: 83884: 9993:99344:1:2334:";
-  std::vector<float> res;
-  StringSplit<float>(s, ":", res);
-  for (auto i : res) {
-    std::cout << i << std::endl;
-  }
-
-  std::vector<int64_t> v{10, 2, 14, 23};
-  bool ret =
-      std::all_of(v.begin(), v.end(), [](int64_t i) { return i % 2 == 0; });
-
-  std::cout << ret << std::endl;
+  std::cout << "test" << std::endl;
 
   return 0;
 }

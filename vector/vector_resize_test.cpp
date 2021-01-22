@@ -25,5 +25,16 @@ int main() {
 
   cout << endl;
 
+  int *data = v.data();
+  for (size_t i = 0; i < v.size(); i++) {
+    cout << data[i] << endl;
+  }
+
+  v.resize(5);
+  data = v.data();
+  for (size_t i = 0; i < v.size(); i++) {
+    cout << data[i] << endl;
+  }
+
   return 0;
 }

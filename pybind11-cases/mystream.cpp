@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -25,6 +26,12 @@ void test_ostream(std::ostream &os) {
 
 void test_func() { std::cout << "test func" << std::endl; }
 
+class SearchEngineException : public std::runtime_error {
+public:
+  explicit SearchEngineException(const std::string &msg)
+      : std::runtime_error(msg) {}
+};
+
 class Person {
 public:
   Person() = default;
@@ -34,7 +41,11 @@ private:
   std::string name;
 };
 
-void Person::GetName(int a) { std::cout << a << std::endl; }
+void Person::GetName(int a) {
+  std::cout << a << std::endl;
+  throw SearchEngineException("se exception");
+  cout << "after throw exception" << endl;
+}
 
 PYBIND11_MODULE(mystream, m) {
   m.doc() = "stream test";
