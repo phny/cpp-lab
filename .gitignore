@@ -37,3 +37,7 @@ build/*
 .history/*
 cmake-build-debug
 .idea
+
+# core
+core.*
+*core.*

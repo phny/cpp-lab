@@ -9,8 +9,23 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-using namespace std;
 #include <set>
+#include <vector>
+
+using namespace std;
+
+void SetInsetTest() {
+  std::vector<int> v1{1, 2, 3, 4};
+  std::vector<int> v2{4, 5, 6, 7};
+  std::set<int> s{100, 200};
+  std::copy(v1.begin(), v1.end(), std::inserter(s, s.begin()));
+  std::copy(v2.begin(), v2.end(), std::inserter(s, s.begin()));
+  for (auto i : s) {
+    cout << i << " ";
+  }
+  cout << endl;
+}
+
 int main() {
   freopen("in.txt", "r", stdin);
   set<int> x1, x2, x;
@@ -46,5 +61,8 @@ int main() {
     cout << *it << endl;
     it++;
   }
+
+  SetInsetTest();
+
   return 0;
 }

@@ -1,5 +1,6 @@
 #include <Eigen/Dense>
 #include <iostream>
+#include <vector>
 
 #include <math.h>
 
