@@ -1,0 +1,104 @@
+{
+  # 是否需要保存中间结果
+  "save_internal_result": true, 
+  
+  # 数据集读取方式
+  "data_loader": {
+    # 每个特征文件里面的最大特征数量: 默认 1 亿
+    "max_feature_num_in_part": 100000000, 
+
+    # 读取数据源文件的方式，在这里只需要修改 dataset_type 字段即可
+    "load_entity_set_config": {
+      # 特征维度
+      "feature_dim": 256, 
+      "quantize_mode": "FP32", 
+      # 特征文件的格式，可选值
+      #    cstk: cstk 数据格式的文件
+      #    only_feature: 纯特征二进制文件
+      # "dataset_type": "cstk", 
+      "dataset_type": "only_feature", 
+      # 最多使用的样本数量，设置为 0 则是全部读取
+      "max_feature_num": 0, 
+      # 是否进行随机洗牌
+      "shuffle": false, 
+      # 起始 id, 仅在 only_feature 模式有作用
+      "start_id": 0, 
+    }, 
+  }, 
+
+  "full_cluster": {
+    # GCN 处理
+    "GCN": {
+      "topk": 32, 
+      "score_threshold": 0.5,
+      "beta": 0.5, 
+      "repeat_times": 2, 
+
+
+      # 检索引擎的配置信息
+      "search_engine_config": {
+        # 使用的 GPU
+        # "gpu_ids": [ 0 ], 
+        "gpu_ids": [ 0, 1, 2, 3, 4, 5, 6, 7 ], 
+        # 索引类型
+        "index_type": "auto", 
+        # 检索的 batch_size
+        "search_batch_size": 1024000, 
+        # 特征维度
+        "feature_dim": 256, 
+        # 检索时的探测点数
+        "nprobe": 32, 
+        # 检索时的计算模式
+        "quantize_mode": "FP32", 
+        # "quantize_mode": "INT8", 
+        # 离线索引文件路径
+        "index_data": "index_for_clustering.bin"
+        # "index_data": "/root/gitlab/cstk/build.back/install/ivf1_pq32.index"
+      }, 
+    }, 
+
+    # 聚类处理
+    "cluster_config": {
+      # 检索引擎的配置信息
+      "search_engine_config": {
+        # 使用的 GPU
+        "gpu_ids": [ 0 ], 
+        # "gpu_ids": [ 0, 1, 2, 3, 4, 5, 6, 7 ], 
+        # 索引类型
+        "index_type": "auto", 
+        # 检索的 batch_size
+        "search_batch_size": 1024000, 
+        # 特征维度
+        "feature_dim": 256, 
+        # 检索时的探测点数
+        "nprobe": 32, 
+        # 检索时的计算模式
+        "quantize_mode": "FP32", 
+        # "quantize_mode": "INT8", 
+        # 离线索引文件路径
+        "index_data": "index_for_clustering.bin"
+        # "index_data": "/root/gitlab/cstk/build.back/install/ivf1_pq32.index"
+      }, 
+
+      
+      # 聚类的方法: 可选值: DBSCAN, DensityPeak
+      "type": "DBSCAN", 
+      
+      # 该聚类方法需要的参数 (DBSCAN)
+      "cluster_method_config": {
+        # 搜索 topk
+        "topk": 32, 
+        # 相似度超过该阈值认为有连接
+        "score_threshold": 0.9, 
+        # 连接数量超过这个阈值认为是 core sample
+        "density_threshold": 0, 
+      }, 
+    }, 
+
+    # 释放孤立点
+    "release_isolate": {
+      "min_sample_per_cluster": 3, 
+    }, 
+  }, 
+}
+

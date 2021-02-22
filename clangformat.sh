@@ -9,6 +9,8 @@ function checkCPP(){
     # sub string filtering
     if  [[ $1 =~ "eigen/eigen3" ]];then
       return 1
+    elif [[ $1 =~ "yaml-test/build" ]];then
+      return 1
     # source file
     elif [[ $1 == *.cc ]];then
 		  return 0

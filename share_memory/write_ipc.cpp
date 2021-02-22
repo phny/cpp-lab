@@ -1,79 +1,90 @@
+#include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <signal.h>
 #include <string.h>
-#include <sys/types.h>
 #include <sys/ipc.h>
+#include <sys/sem.h>
 #include <sys/shm.h>
+#include <unistd.h>
 
-#define N 64
+using namespace std;
 
-typedef struct
-{
-    pid_t pid;
-    char buf[N];
-} SHM;
+void P(int semid) {
+  struct sembuf buf = {0, -1, 0};
 
-void handler(int signo)
-{
-    //printf("get signal\n");
-    return;
+  semop(semid, &buf, 1);
 }
 
-int main()
-{
-    key_t key;
-    int shmid;
-    SHM *p;
-    pid_t pid;
+void V(int semid) {
+  struct sembuf buf = {0, 1, 0};
 
-    if ((key = ftok(".", 'm')) < 0)
-    {
-        perror("fail to ftok");
-        exit(-1);
-    }
+  semop(semid, &buf, 1);
+}
 
-    signal(SIGUSR1, handler);               //  注册一个信号处理函数
-    if ((shmid = shmget(key, sizeof(SHM), 0666 | IPC_CREAT | IPC_EXCL)) < 0)
-    {
-        if (EEXIST == errno)                //  存在则直接打开
-        {
-            shmid = shmget(key, sizeof(SHM), 0666);
+int get_sem_id() {
+  key_t keyid = ftok("testforsem", 102);
 
-            p = (SHM *)shmat(shmid, NULL, 0);
+  if (keyid < 0) {
+    cerr << " get key failed" << endl;
+    return -1;
+  }
 
-            pid = p->pid;
-            p->pid = getpid();
-            kill(pid, SIGUSR1);
-        }
-        else//出错
-        {
-            perror("fail to shmget");
-            exit(-1);
-        }
-    }
-    else//成功
-    {
+  int semid = semget(keyid, 1, IPC_CREAT | 0660);
+  if (semid < 0) {
+    cerr << "get semphore failed" << endl;
+    return -1;
+  }
 
-        p = (SHM *)shmat(shmid, NULL, 0);
-        p->pid = getpid();                  //  把自己的pid写到共享内存
-        pause();
-        pid = p->pid;                       //  得到读端进程的pid
+  return semid;
+}
 
-    }
+int main(int argc, char **argv) {
+  key_t keyid = ftok("./forshm", 1);
 
-    while ( 1 )
-    {
-        printf("write to shm : ");
-        fgets(p->buf, N, stdin);            //  接收输入
-        kill(pid, SIGUSR1);                 //  向读进程发SIGUSR1信号
-        if (strcmp(p->buf, "quit\n") == 0) break;
-        pause();                            //  阻塞，等待信号
-    }
-    shmdt(p);
-    shmctl(shmid, IPC_RMID, NULL);          //  删除共享内存
+  if (keyid < 0) {
+    cerr << "get keyid failed !" << endl;
+    return -1;
+  }
 
-    return 0;
+  int shmid = shmget(keyid, 1024, IPC_CREAT | 0660);
+
+  if (shmid < 0) {
+    cerr << "get share memory error!" << endl;
+    return -1;
+  }
+
+  cout << "shmmem keyid " << keyid;
+  cout << " share memory id: " << shmid << endl;
+
+  void *addr = shmat(shmid, (char *)0, 0);
+  if (addr == (void *)-1) {
+    perror("shmat");
+  }
+
+  cout << "shared memory addr :" << addr << endl;
+
+  int semid = get_sem_id();
+  if (semid < 0) {
+    return -1;
+  }
+
+  if (semctl(semid, 0, SETVAL, 1) < 0) {
+    cerr << "Inital sem val failed" << endl;
+    return -1;
+  }
+
+  P(semid);
+  cout << "I'm pid " << getpid() << " ready for writing a msg " << endl;
+
+  char *msg = "Hello shared memory!";
+  char *p = (char *)addr;
+  strcpy(p, msg);
+  //模拟耗时操作
+  sleep(10);
+  V(semid);
+
+  cout << "I'm pid " << getpid() << " writed a msg " << endl;
+
+  shmdt(addr);
+
+  return 0;
 }

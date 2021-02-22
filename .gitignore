@@ -37,6 +37,7 @@ build/*
 .history/*
 cmake-build-debug
 .idea
+yaml-test/build/
 
 # core
 core.*
