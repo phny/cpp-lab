@@ -27,7 +27,6 @@ LIST(APPEND OTHER_DEPENDENCIES ${FAISS_LIBRARIES})
 
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_SOURCE_DIR}/utils)
 
-
 # Find all main *.cpp files and store in list mains
 file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach (mainfile IN LISTS mains)
