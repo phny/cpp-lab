@@ -1,10 +1,10 @@
 #include <Eigen/Dense>
+#include <algorithm>
 #include <iostream>
+#include <numeric>
+#include <vector>
 
 #include <math.h>
-
-using namespace std;
-using namespace Eigen;
 
 using namespace std;
 using namespace Eigen;
@@ -15,7 +15,7 @@ void VectorSoftMax(const std::vector<T> &v, std::vector<T> &s) {
 
   T sum = 0;
   std::transform(v.begin(), v.end(), std::back_inserter(s), loge);
-  sum = accumulate(s.begin(), s.end(), sum);
+  sum = std::accumulate(s.begin(), s.end(), sum);
   for (size_t i = 0; i < s.size(); ++i) {
     s.at(i) /= sum;
   }

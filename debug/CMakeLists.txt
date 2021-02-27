@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 if (CMAKE_BUILD_TYPE) 
     ADD_DEFINITIONS(-DDEBUG) 
-    SET(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -g")
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer") 
+    SET(CMAKE_C_FLAGS "-fsanitize=address")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=address -fno-omit-frame-pointer") 
 endif()
 
 set(CMAKE_CXX_STANDARD 11) 
