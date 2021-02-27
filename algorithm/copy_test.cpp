@@ -11,11 +11,17 @@
 #include <vector>    // std::vector
 
 int main() {
-  std::string a = "skkkkkdd";
-  std::string b;
-  std::copy(a.begin(), a.end(), b.begin());
+  std::vector<int> v1{1, 2, 3};
+  std::vector<int> v2{4, 5, 6, 7, 8, 9};
+  std::copy(v1.begin(), v1.end(), v2.begin());
+  for_each(v2.begin(), v2.end(), [](const int i) { std::cout << i << " "; });
 
-  std::cout << b << std::endl;
+  // std::vector<int> dst;
+  // std::copy(v1.begin(), v1.end(), std::back_inserter(dst));
+  // std::copy(v2.begin(), v2.end(), std::back_inserter(dst));
+
+  // for_each(dst.begin(), dst.end(), [](const int i) { std::cout << i << " ";
+  // }); std::cout << std::endl;
 
   return 0;
 }
