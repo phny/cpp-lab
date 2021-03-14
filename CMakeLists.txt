@@ -31,7 +31,7 @@ ENDMACRO()
 SUBDIRLIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR})
 
 # 移除不相关的文件夹
-list(REMOVE_ITEM SUBDIRS ".git" ".vscode" "build" ".history" "cmake" "cmake-build-debug" ".idea")
+list(REMOVE_ITEM SUBDIRS ".git" ".vscode" "build" ".history" "cmake" "cmake-build-debug" ".idea" "torch-script" "gperftools")
 
 # 添加所有的子目录
 foreach(subdirectory  ${SUBDIRS})

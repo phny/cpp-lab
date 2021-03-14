@@ -1,6 +1,7 @@
 #include <Eigen/Dense>
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <vector>
 
 #include <math.h>
