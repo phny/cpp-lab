@@ -19,13 +19,13 @@ struct TreeNode {
 /// @brief find Tree min depth
 /// @param[in] root Tree root pointer
 /// @return Tree min depth
-int MinDepth(const struct TreeNode *root) {
+int MinDepth(struct TreeNode *root) {
   if (root == nullptr)
     return 0;
   std::queue<struct TreeNode *> queue;
   queue.push(root);
   int depth = 1;
-  while (!quue.empty()) {
+  while (!queue.empty()) {
     int qsize = queue.size();
     for (size_t i = 0; i < qsize; i++) {
       struct TreeNode *node = queue.front();

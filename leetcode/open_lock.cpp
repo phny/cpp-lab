@@ -71,7 +71,7 @@ int OpenLock(const std::vector<string> &deadends, const string target) {
 
 int main() {
   std::vector<string> deadends = {"2382", "5422", "4928", "9983"};
-  int steps = OpenLock(deadends, "9054");
+  int steps = OpenLock(deadends, "2345");
   cout << steps << endl;
 
   return 0;
