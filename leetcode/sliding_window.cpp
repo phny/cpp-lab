@@ -9,6 +9,9 @@ using namespace std;
 /// "adbecfebanc", t = "abc", 应该返回 "banc"
 string MinWindow(string s, string t) {
   std::unordered_map<char, int> need, window;
+  for (char c : t) {
+    need[c]++;
+  }
   int left = 0;
   int right = 0;
   int valid = 0;
@@ -21,6 +24,7 @@ string MinWindow(string s, string t) {
     right++;
     // 进行窗口内的数据一系列更新
     if (need.count(c)) {
+      window[c]++;
       if (window[c] == need[c]) {
         valid++;
       }
@@ -52,7 +56,7 @@ string MinWindow(string s, string t) {
 int main(int argc, char *argv[]) {
 
   string s = "adbecfebanc";
-  string t = "abc";
+  string t = "abce22222222222222222";
   string res = MinWindow(s, t);
 
   cout << res << endl;
