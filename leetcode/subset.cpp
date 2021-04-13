@@ -12,7 +12,9 @@ std::vector<std::vector<int>> subsets(std::vector<int> &nums) {
   }
   int n = nums.back();
   nums.pop_back();
+  // 先递归算出前面元素的所有子集
   std::vector<std::vector<int>> res = subsets(nums);
+  // 然后在之前的结果上进行追加
   for (size_t i = 0; i < res.size(); i++) {
     res.push_back(res[i]);
     res.back().push_back(n);
