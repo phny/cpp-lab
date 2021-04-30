@@ -12,8 +12,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -fPIC -mavx")
 find_package(PythonInterp 3 REQUIRED)
 
 # 添加 pybind11 源码目录
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pybind11)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pybind11 build)
 
+# 添加include目录
 include_directories(${PYTHON_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/pybind11/)
 

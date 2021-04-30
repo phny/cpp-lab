@@ -7,7 +7,6 @@ IF(YamlCpp_FOUND)
     RETURN()
 ENDIF()
 
-
 set(YamlCpp_FOUND TRUE)
 # build directory
 set(YamlCpp_PREFIX ${CMAKE_BINARY_DIR}/external/prefix/YamlCpp)
