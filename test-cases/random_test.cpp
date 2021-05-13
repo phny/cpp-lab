@@ -12,6 +12,8 @@
 #include <time.h>
 #include <vector>
 
+#include "utils/random_utils.hpp"
+
 using namespace std;
 
 /// @brief 随机生成Cluster的 feature_ids
@@ -65,6 +67,16 @@ int main() {
     cout << num << endl;
   }
   cout << "different nums: " << s.size() << endl;
+
+  std::vector<int64_t> res;
+  for (size_t i = 0; i < 1000; i++) {
+    int64_t n = RandomGenerateInteger(0, 100);
+    res.push_back(n);
+  }
+
+  for (auto i : res) {
+    std::cout << i << std::endl;
+  }
 
   return 0;
 }

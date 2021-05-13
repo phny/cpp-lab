@@ -45,7 +45,7 @@ void Foo(int a) {
 
 int main(int argc, char *argv[]) {
   // 结构体的具名赋值方式
-  struct A a = {.v = {1, 2, 3}, .age = 10, .name = "tome"};
+  // struct A a = {.v = {1, 2, 3}, .age = 10, .name = "tome"};
 
   // SetStruct(a);
   // std::cout << a.age << " " << a.name << std::endl;
