@@ -87,28 +87,6 @@ int64_t GetCameraIdFrom(const int64_t entity_id) {
   return tmp & 0x000000000000007F;
 }
 
-/// @brief 从文件中加载所有行
-void LoadVectorFromFile(const std::string &file_path,
-                        std::vector<std::string> &vec) {
-  std::ifstream in_file(file_path);
-
-  if (!in_file) {
-    std::cout << "can not open file: " << file_path << std::endl;
-    exit(-1);
-  }
-
-  vec.clear();
-  // 一次读取一行数据
-  if (in_file.is_open()) {
-    std::string line;
-    while (std::getline(in_file, line)) {
-      vec.push_back(line);
-    }
-  }
-
-  in_file.close();
-}
-
 /// @brief 读取文本文件到数组中
 template <typename Dtype>
 void ReadLinesToVec(const std::string camera_ids_path,

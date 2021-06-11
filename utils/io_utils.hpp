@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -278,6 +279,49 @@ void MoveFile(const std::string src_path, const std::string dst_path) {
   std::remove(src_path.c_str());
   out.close();
   in.close();
+}
+
+/// @brief 从文件中加载所有行
+void LoadVectorFromFile(const std::string &file_path,
+                        std::vector<std::string> &vec) {
+  std::ifstream in_file(file_path);
+
+  if (!in_file) {
+    std::cout << "can not open file: " << file_path << std::endl;
+    exit(-1);
+  }
+
+  vec.clear();
+  // 一次读取一行数据
+  if (in_file.is_open()) {
+    std::string line;
+    while (std::getline(in_file, line)) {
+      vec.push_back(line);
+    }
+  }
+
+  in_file.close();
+}
+
+/// @brief 读取文本文件到数组中
+template <typename Dtype>
+void LoadLinesToVector(const std::string path, std::vector<Dtype> &output_vec) {
+  // 读取所有行
+  std::vector<std::string> v;
+  LoadVectorFromFile(path, v);
+  output_vec = [&v]() -> std::vector<Dtype> {
+    // 将 camera_ids 转换成 int32_t
+    std::vector<Dtype> ret;
+    std::stringstream oss;
+    for (auto &item : v) {
+      Dtype dst;
+      oss << item;
+      oss >> dst;
+      oss.clear();
+      ret.push_back(dst);
+    }
+    return ret;
+  }();
 }
 
 #endif

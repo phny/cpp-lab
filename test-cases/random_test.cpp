@@ -5,6 +5,7 @@
         > Created Time: 2020年03月26日 星期四 15时45分26秒
  ************************************************************************/
 
+#include <algorithm>
 #include <cstdlib>
 #include <iostream>
 #include <random>
@@ -58,24 +59,44 @@ int main() {
   //}
   // cout << s.size() << endl;
 
-  vector<int64_t> v2;
-  RandomGenerateFeatureIds_2(1, RAND_MAX, v2, 1, 100);
-  cout << "random number nums: " << v2.size() << endl;
-  std::set<int64_t> s;
-  for (auto &num : v2) {
-    s.insert(num);
-    cout << num << endl;
-  }
-  cout << "different nums: " << s.size() << endl;
+  // vector<int64_t> v2;
+  // RandomGenerateFeatureIds_2(1, RAND_MAX, v2, 1, 100);
+  // cout << "random number nums: " << v2.size() << endl;
+  // std::set<int64_t> s;
+  // for (auto &num : v2) {
+  //   s.insert(num);
+  //   cout << num << endl;
+  // }
+  // cout << "different nums: " << s.size() << endl;
 
-  std::vector<int64_t> res;
-  for (size_t i = 0; i < 1000; i++) {
-    int64_t n = RandomGenerateInteger(0, 100);
-    res.push_back(n);
-  }
+  // std::vector<int64_t> res;
+  // for (size_t i = 0; i < 1000; i++) {
+  //   int64_t n = RandomGenerateInteger(0, 100);
+  //   res.push_back(n);
+  // }
 
-  for (auto i : res) {
-    std::cout << i << std::endl;
+  // for (auto i : res) {
+  //   std::cout << i << std::endl;
+  // }
+
+  // for (size_t i = 0; i < 1000; i++) {
+  //   int64_t region_id = ConstructRegionID();
+  //   int64_t camera_id = ConstructCameraID();
+  //   int64_t timestamp = ConstructTimestamp();
+  //   int64_t seq = ConstructSeq();
+  //   cout << "region_id: " << region_id << ", camera_id: " << camera_id << ",
+  //   timestamp: " << timestamp << ", seq: " << seq << endl; auto feature_id =
+  //   ConstructFeatureID(region_id, camera_id, timestamp, seq); std::cout <<
+  //   feature_id << std::endl;
+  // }
+
+  std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  auto it = std::min_element(v.begin(), v.end());
+  v.erase(it);
+  // v.erase(v.begin() + 1);
+  cout << "v.size: " << v.size() << endl;
+  for (auto i : v) {
+    cout << i << endl;
   }
 
   return 0;
