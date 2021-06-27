@@ -103,7 +103,6 @@ Matrix<T, Dynamic, Dynamic> SoftMax(const Matrix<T, Dynamic, Dynamic> &input,
   } else {
     std::cout << "axis: " << axis << " error" << std::endl;
   }
-
   return res;
 }
 
@@ -126,8 +125,38 @@ void MatrixSoftMax() {
   cout << "axis = 1: \n" << res << endl;
 }
 
+// 矩阵softmatx测试:等效与scipy的softmax函数
+void MatrixSoftMaxTest2() {
+  Eigen::MatrixXf m(8, 2);
+  m << 1.405351, 0.027658, 1.461455, 0.194644, 1.341406, 0.716682, 1.544432,
+      -0.158334, 0.426656, 1.099162, 0.042395, 1.114284, 0.000362, 1.338847,
+      0.311237, 1.049159;
+
+  cout << SoftMax(m) << endl;
+  cout << "----------------------" << endl;
+  cout << SoftMax(m, 0) << endl;
+  cout << "----------------------" << endl;
+  cout << SoftMax(m, 1) << endl;
+}
+
+void Test1() {
+  Eigen::MatrixXf a(2, 2);
+  a << 1, 2, 3, 4;
+  Eigen::MatrixXf b(2, 2);
+  b << 4, 5, 6, 7;
+
+  Eigen::MatrixXf res = a * b;
+  cout << res << endl;
+
+  cout << SoftMax(res, 1) << endl;
+}
+
 int main(int argc, char *argv[]) {
-  MatrixSoftMax();
+  // MatrixSoftMax();
+
+  // MatrixSoftMaxTest2();
+
+  Test1();
 
   return 0;
 }

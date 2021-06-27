@@ -12,6 +12,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -fPIC -mavx")
 # Eigen include directory
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/eigen3)
 
+# utils
+include_directories(${PROJECT_SOURCE_DIR})
+
 # Find all main *.cpp files and store in list mains
 file(GLOB mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp")
 foreach (mainfile IN LISTS mains)

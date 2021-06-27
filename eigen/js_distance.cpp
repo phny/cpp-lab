@@ -63,7 +63,7 @@ JensenshannonDistance(const Matrix<T, Dynamic, Dynamic> &m1,
   return res;
 }
 
-int main(int argc, char *argv[]) {
+void Test1() {
   std::vector<float> v1 = {0.8, 0.1, 0.1};
   std::vector<float> v2 = {0.4, 0.4, 0.2};
   // 两个向量的JS散度计算
@@ -98,6 +98,30 @@ int main(int argc, char *argv[]) {
     }
   }
   cout << res << endl;
+}
+
+void Test2() {
+  // 矩阵的JS散度计算
+  MatrixXf m1(8, 2);
+  m1 << 0.736299, 0.263701, 0.714102, 0.285898, 0.609315, 0.390685, 0.7678,
+      0.2322, 0.399189, 0.600811, 0.328644, 0.671356, 0.286473, 0.713527,
+      0.368968, 0.631032;
+  cout << "m1 row: " << m1.rows() << ", cols: " << m1.cols() << endl;
+  auto js = JensenshannonDistance(m1, m1);
+  cout << js << endl;
+
+  for (size_t i = 0; i < js.rows(); i++) {
+    for (size_t j = 0; j < js.cols(); j++) {
+      js(i, j) = 1 - js(i, j);
+    }
+  }
+  cout << js << endl;
+}
+
+int main(int argc, char *argv[]) {
+  // Test1();
+
+  Test2();
 
   return 0;
 }
